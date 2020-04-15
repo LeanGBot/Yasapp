@@ -1,0 +1,9 @@
+.vscode/
+assets-src/
+hooks/
+node_modules/
+platforms/
+plugins/
+www/bkp/
+www/framework7/
+www/lib/
