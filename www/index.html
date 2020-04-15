@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color-green" content="#2196f3">
+  <title>PictaVenta</title>
+  <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.css">
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+<div id="app">
+<!--INI Page content-->
+
+<!--Login-->
+<div class="statusbar"></div>
+<div class="view view-main">
+    <div data-name="index" class="page">
+      <div class="page-content text-align-center">
+        <!--Page content-->
+        <div class="page-content">
+          <!--cosas del popup-->
+          <div class="tit_login login-screen-title">Bienvenido/a</div>
+          <div class="list no-hairlines-md">
+             <ul>
+                 <li class="cont_login item-content item-input item-input-outline">
+                 <div class="item-inner">
+                    <div class="item-title item-floating-label">Email</div>
+                    <div class="item-input-wrap">
+                      <input id="login_email" type="email" placeholder="Email">
+                      <span class="input-clear-button"></span>
+                    </div>
+                 </div>
+                 </li>
+
+                 <li class="cont_login item-content item-input item-input-outline">
+                 <div class="item-inner">
+                    <div class="item-title item-floating-label ">Contraseña</div>
+                    <div class="item-input-wrap">
+                       <input id="login_pass" type="password" placeholder="Contraseña">
+                       <span class="input-clear-button"></span>
+                    </div>
+                 </div>
+                 </li>
+                 
+                <div class="block">
+                  <div class="row">
+                    <div class="col">
+                     <button class="col button button-fill color-green segmented-round-md">Login</button>
+                    </div>
+                  </div>
+                </div>
+                 <!-- poner login con RS-->
+              </ul>
+              
+              <div class="block">
+                <div class="row">
+                  <div class="col"> </div>
+                  <div class="col">
+                    <p><a href="#" data-popup=".registro" class="popup-open">Registro</a></p>
+                  </div>
+                  <div class="col"> </div>
+                </div>
+              </div>
+          </div>
+        <!--End page content-->
+        </div>
+      </div>
+    </div>
+</div>
+<!--Fin login-->
+
+<!--Registro-->
+<div class="popup registro">
+  <div class="view">
+    <div class="page">
+      <div class="navbar">
+        <div class="navbar-bg"></div>
+        <div class="navbar-inner">
+          <div class="title">Nuevo usuario</div>
+          <div class="right">
+            <a class="link popup-close">Atras</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="page-content">
+         <!--cosas del popup-->
+          <div class="list no-hairlines-md">
+            <ul>
+                <li class="item-content item-input item-input-outline">
+                  <div class="item-inner">
+                    <div class="item-title item-floating-label">Email</div>
+                    <div class="item-input-wrap">
+                      <input id="register_mail" type="email" placeholder="Email">
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="item-content item-input item-input-outline">
+                  <div class="item-inner">
+                    <div class="item-title item-floating-label">Contraseña</div>
+                    <div class="item-input-wrap">
+                      <input id="register_pass" type="password" placeholder="Contraseña">
+                      <span class="input-clear-button"></span>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="item-content item-input item-input-outline">
+                  <div class="item-inner">
+                    <div class="item-title item-floating-label">Repetir contraseña</div>
+                      <div class="item-input-wrap">
+                        <input type="password" placeholder="Repetir contraseña">
+                        <span class="input-clear-button"></span>
+                      </div>
+                  </div>
+                </li>
+                <!-- poner login con RS-->
+            </ul>
+          </div>
+        
+        <div class="block">
+          <div class="row">
+            <div class="col">
+              <button class="col button button-fill color-green segmented-round-md">Registrarse</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>     
+<!--Fin registro-->
+
+<!--END Page content-->
+
+<div id="scripts">
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="lib/framework7/js/framework7.bundle.js"></script>
+<script type="text/javascript" src="js/my-app.js"></script>
+
+<!--FireBase-->
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDBEK93jElO2rdp36yrw183lCdaBmBAZ0U",
+    authDomain: "pictaventa.firebaseapp.com",
+    databaseURL: "https://pictaventa.firebaseio.com",
+    projectId: "pictaventa",
+    storageBucket: "pictaventa.appspot.com",
+    messagingSenderId: "1008307670936",
+    appId: "1:1008307670936:web:3b1c5d82146a72db1725ed"
+  };
+  firebase.initializeApp(firebaseConfig);
+</script>
+</div>
+</body>
+</html>

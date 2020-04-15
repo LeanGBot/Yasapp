@@ -1,0 +1,42 @@
+/*Pagina: Menu*/
+.menu-pag {
+    background: url("./img/bkg_index.png") no-repeat center center fixed !important;
+    background-size: cover !important;
+}
+#div_btn_init {
+    border: chartreuse 2px solid;
+    position: relative;
+    left: 0;
+    top: 47.25%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+}
+#btn_nuevoProducto {
+    border: chartreuse 2px solid;
+    position: relative;
+    left: 0;
+    top: 65%;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+.usuarios_menu {
+    border: chartreuse 2px solid;
+    position: relative;
+    left: 5%;
+    bottom: 0%;
+    width: 90%;
+    text-align: center;
+    font-size: 20px;
+}
+.cont_login {
+    position: absolute;
+    left: 0;    
+    margin: auto;
+    text-align: center;
+    width: 80%;
+}
+.tit_login {
+    margin-top: 20%;
+}
