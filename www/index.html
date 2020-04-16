@@ -48,21 +48,23 @@
                  
                 <div class="block">
                   <div class="row">
+                    <div class="col"> </div>
                     <div class="col">
-                     <button class="col button button-fill color-green segmented-round-md">Login</button>
+                     <button id="btn_login" class="btn_login col button button-fill color-green segmented-round-md">Ingresar</button>
                     </div>
+                    <div class="col"> </div>
                   </div>
                 </div>
                  <!-- poner login con RS-->
               </ul>
-              
+             
               <div class="block">
                 <div class="row">
-                  <div class="col"> </div>
-                  <div class="col">
-                    <p><a href="#" data-popup=".registro" class="popup-open">Registro</a></p>
+                  <div class="btn_regis col">
+                    <hr>
+                    <p>¿No tienes una cuenta?<br><a href="#" data-popup=".registro" class="popup-open">Registrate</a></p>
+                    <hr> 
                   </div>
-                  <div class="col"> </div>
                 </div>
               </div>
           </div>
@@ -127,7 +129,7 @@
         <div class="block">
           <div class="row">
             <div class="col">
-              <button class="col button button-fill color-green segmented-round-md">Registrarse</button>
+              <button id="btn_registrarse" class="col button button-fill color-green segmented-round-md">Registrarse</button>
             </div>
           </div>
         </div>
@@ -145,8 +147,14 @@
 <script type="text/javascript" src="js/my-app.js"></script>
 
 <!--FireBase-->
-<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+<!--
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebase/5.9.1/firebase-firestore.js"></script>
+-->
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
 
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->

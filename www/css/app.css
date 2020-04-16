@@ -1,4 +1,3 @@
-/*Pagina: Menu*/
 .menu-pag {
     background: url("./img/bkg_index.png") no-repeat center center fixed !important;
     background-size: cover !important;
@@ -39,4 +38,10 @@
 }
 .tit_login {
     margin-top: 20%;
+}
+.btn_login {
+    height: 7vh;
+}
+.btn_regis {
+    margin-top: 35%;
 }
