@@ -1,47 +1,52 @@
 var $$ = Dom7;
 
 var app = new Framework7({
-    root: '#app',
-    name: 'My App',
-    id: 'com.myapp.test',
-    panel: {
-      swipe: 'left',
+  root: '#app',
+  name: 'My App',
+  id: 'com.myapp.test',
+  panel: {
+    swipe: 'left',
+  },
+  routes: [
+    {
+      path: '/index/',
+      url: 'index.html',
     },
-    routes: [
-      {
-        path: '/index/',
-        url: 'index.html',
-      },
-      {
-        path: '/menu/',
-        url: 'menu.html',
-      },
-      {
-        path: '/category/',
-        url: 'category.html',
-      },
-      {
-        path: '/subcategory/',
-        url: 'subcategory.html',
-      },
-      {
-        path: '/list/',
-        url: 'list.html',
-      },
-    ]
-    // ... other parameters
-  });
+    {
+      path: '/menu/',
+      url: 'menu.html',
+    },
+    {
+      path: '/category/',
+      url: 'category.html',
+    },
+    {
+      path: '/subcategory/',
+      url: 'subcategory.html',
+    },
+    {
+      path: '/list/',
+      url: 'list.html',
+    },
+    {
+      path: '/register/',
+      url: 'register.html',
+    },
+  ]
+  // ... other parameters
+});
 
 var mainView = app.views.create('.view-main');
 var email_login;
-var db, refUsuarios, refTiposUsuarios;
+var db, refProducto;
+var categoria, nombre, precio;
 
 $$(document).on('deviceready', function(e) {
   console.log("Inicializado: Dispositivo");
 
-  $$('#btn_registrarse').on('click', fnRegistro);
-  $$('#btn_login').on('click', fnLogin);
-
+  db = firebase.firestore();
+  refProducto = db.collection("PRODUCTO");
+ 
 });
 
 $$(document).on('page:init', function (e) {
@@ -50,10 +55,14 @@ $$(document).on('page:init', function (e) {
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   console.log("Inicializado: Index");
+
+  $$('#btn_registrarse').on('click', fnRegistro);
+  $$('#btn_login').on('click', fnLogin);
 });
 
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
+  $$('#btn_guardarDatos').on('click', fnNuevoProducto);
 });
 
 $$(document).on('page:init', '.page[data-name="category"]', function (e) {
@@ -67,6 +76,13 @@ $$(document).on('page:init', '.page[data-name="subcategory"]', function (e) {
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
 });
+
+$$(document).on('page:init', '.page[data-name="register"]', function (e) {
+  console.log("Inicializado: Registro");
+
+  $$('#btn_registrarse').on('click', fnRegistro);
+});
+
 
 /*Funciones*/
 function fnRegistro() {
@@ -88,7 +104,7 @@ function fnRegistro() {
   .then(function(){
       if(mostrarError == 0){
         console.log('Registro exitoso');
-        mainView.router.navigate("/menu/");
+        mainView.router.navigate("/index/");
       }
   });
 }
@@ -112,9 +128,32 @@ function fnLogin() {
 
       .then(function(){
         if (mostrarError == 1) {
-          console.log("login incorrecto")
+          console.log("login incorrecto");
         } else {
-          console.log("login correcto")  
+          console.log("login correcto");
+          mainView.router.navigate("/menu/");
         }
       });
+}
+
+function fnCargaUsuario() {
+  //datos de carga de usuario
+}
+
+function fnNuevoProducto() {
+  categoria = $$('#inpProdNuevo_Categoria').val();
+  nombre = $$('#inpProdNuevo_Nombre').val();
+  precio = $$('#inpProdNuevo_Precio').val();
+  
+  var data_prodNuevo = {
+    categoria: categoria,
+    nombre: nombre,
+    precio: precio,
+  }
+
+  refProducto.doc(email_login)
+    .set(data_prodNuevo);
+
+  console.log("Producto ingresado");
+  mainView.router.navigate("/menu/");
 }

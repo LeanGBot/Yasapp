@@ -45,3 +45,17 @@
 .btn_regis {
     margin-top: 35%;
 }
+.list_regis {
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    width: 70%;
+    left: 15vw;
+    top: 15vh;
+}
+
+.btn_regis_conf {
+    margin: auto;
+    top: 130vw;
+    width: 75%;
+}
