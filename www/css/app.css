@@ -1,24 +1,46 @@
+.item-input-wrap {
+    background-color: white;
+}
+.item-title {
+    background: none;
+}
+.index_body {
+    background-image: url(./img/FondoAPP.png) !important;
+    background-size: contain ;
+}
+
 .menu-pag {
-    background: url("./img/bkg_index.png") no-repeat center center fixed !important;
-    background-size: cover !important;
+    background-image: url(./img/FondoAPP.png) !important;
+    background-size: contain !important;
 }
 #div_btn_init {
-    border: chartreuse 2px solid;
+    
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    top: 50vh;
     position: relative;
+    /*border: chartreuse 2px solid;
     left: 0;
     top: 47.25%;
-    width: 100%;
+    width: 90%;
     text-align: center;
-    font-size: 25px;
+    */
 }
-#btn_nuevoProducto {
-    border: chartreuse 2px solid;
-    position: relative;
-    left: 0;
-    top: 65%;
-    width: 100%;
-    text-align: center;
+#btn_venta, #btn_nuevoProd {
+    margin: 5vh 0 5vh 0;
+    display: flex;
+    justify-content: center;
     font-size: 20px;
+    top: 10vh;
+    position: relative;
+    padding: 0 10vw 0;
+    left: 30vw;
+    width: fit-content;
+    height: 8vh;
+}
+#btn_venta {
+    left: 63vw;
 }
 .usuarios_menu {
     border: chartreuse 2px solid;
@@ -40,10 +62,13 @@
     margin-top: 20%;
 }
 .btn_login {
-    height: 7vh;
+    height: 6vh;
+    width: 50vw;
+    margin: auto;
+    top: 5vh;
 }
 .btn_regis {
-    margin-top: 35%;
+    margin-top: 24%;
 }
 .list_regis {
     position: absolute;
@@ -53,9 +78,82 @@
     left: 15vw;
     top: 15vh;
 }
-
+.list_add {
+    width: 80vw;
+    height: 60vh;
+    margin: auto;
+    margin-top: 10vh;
+    text-align: center;
+}
 .btn_regis_conf {
     margin: auto;
-    top: 130vw;
+    top: 70vh;
     width: 75%;
 }
+.contLogo {
+    width: 70vw;
+    height: 70vw;
+    margin: auto;
+    margin-top: 8vh;
+    text-align: center;
+    background-image: url(./img/LogoAPP.png)  !important;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+}
+#btn_guardarDatos {
+    margin: auto;
+    width: 50vw;
+}
+
+/*Producto subcategoria*/
+.seccionProducto {
+    margin: 0.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn_decremento, .btn_incremento {
+    padding: 1%;
+    width: 10vw;
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.prodEspecificacion {
+    border: transparent 1vh solid ;
+    width: 40vw;
+    height: 25vw;
+    font-weight: bolder;
+    align-items: center;
+    justify-content: center;
+}
+.prodPic {
+    margin-left: 4vw;
+    box-shadow: rgb(163, 163, 163);
+    border-radius: 15%;
+    width: 28vw;
+    height: 28vw;
+    background-color: rgb(163, 163, 163);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cantidad {
+    border: transparent 2px;
+    width: 10vw;
+    height: 10vw;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tituloCategoria {
+    background-color: rgb(131, 210, 241);
+    font-weight: bolder;
+    padding: 1vh 0 1vh 7vw;
+    border-bottom: 2px gray solid;
+    font-size: 3vh;
+    color: darkslategray;
+}   
+

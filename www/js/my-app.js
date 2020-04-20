@@ -21,8 +21,8 @@ var app = new Framework7({
       url: 'category.html',
     },
     {
-      path: '/subcategory/',
-      url: 'subcategory.html',
+      path: '/new/',
+      url: 'new.html',
     },
     {
       path: '/list/',
@@ -83,6 +83,10 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
   $$('#btn_registrarse').on('click', fnRegistro);
 });
 
+$$(document).on('page:init', '.page[data-name="new"]', function (e) {
+  console.log("Inicializado: Nuevo Producto");
+});
+
 
 /*Funciones*/
 function fnRegistro() {
@@ -124,16 +128,25 @@ function fnLogin() {
           var errorMessage = error.message;
           console.log(errorMessage);
           console.log(errorCode);
-      })
-
+          
+          
+        })
+        
       .then(function(){
         if (mostrarError == 1) {
+          switch (errorCode) {
+            case "auth/wrong-password":
+              console.log("Usuario o contraseña incorrecta");
+              break;
+            default:
+              break;
+          }  
           console.log("login incorrecto");
-        } else {
-          console.log("login correcto");
-          mainView.router.navigate("/menu/");
-        }
-      });
+      } else {
+        console.log("login correcto");
+        mainView.router.navigate("/menu/");
+      }
+    });
 }
 
 function fnCargaUsuario() {
