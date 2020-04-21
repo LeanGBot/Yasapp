@@ -37,15 +37,15 @@ var app = new Framework7({
 });
 
 var mainView = app.views.create('.view-main');
-var email_login;
-var db, refProducto;
-var categoria, nombre, precio;
+var login_email;
+var db, refUsuario;
+var categoria, idProd, plantilla, catNueva, precio;
 
 $$(document).on('deviceready', function(e) {
   console.log("Inicializado: Dispositivo");
 
   db = firebase.firestore();
-  refProducto = db.collection("PRODUCTO");
+  refUsuario = db.collection(login_email);
  
 });
 
@@ -56,6 +56,7 @@ $$(document).on('page:init', function (e) {
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   console.log("Inicializado: Index");
+  login_email = $$('#login_email').val()
 
   $$('#btn_registrarse').on('click', fnRegistro);
   $$('#btn_login').on('click', fnLogin);
@@ -69,6 +70,8 @@ $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="category"]', function (e) {
   console.log("Inicializado: Categorias");
+
+  fnCargaUsuario();
 });
 
 $$(document).on('page:init', '.page[data-name="subcategory"]', function (e) {
@@ -88,9 +91,10 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
 $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
   db = firebase.firestore();
-  refUsuario = db.collection(email_login);
+  refUsuario = db.collection(login_email);
   
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
+  $$('#añadirCat').on('click', fnCrearCategoria);
 });
 
 
@@ -156,25 +160,32 @@ function fnLogin() {
 }
 
 function fnCargaUsuario() {
-  //datos de carga de usuario
+  
+  
+
+
+
+}
+
+function fnCrearCategoria() {
+  console.log("ingreso en fnCrearCategoria")
+
 }
 
 function fnNuevoProducto() {
-
+  
   idProd = $$('#inpProdNuevo_Nombre').val();
   categoria = $$('#inpProdNuevo_Categoria').val();
-  nombre = $$('#inpProdNuevo_Nombre').val();
   precio = $$('#inpProdNuevo_Precio').val();
   
-  var data_prodNuevo = {
-    categoria: categoria,
-    nombre: nombre,
+  var dataProducto = {
+    nombre: idProd,
     precio: precio,
+    categoria: categoria,
   }
-
-  refUsuario.doc(idProd).set(data_prodNuevo);
   
-
-  console.log("Producto ingresado");
+  refUsuario.doc(idProd).set(dataProducto);
+  
+  console.log("Producto añadido");
   mainView.router.navigate("/menu/");
 }
