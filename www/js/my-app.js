@@ -51,6 +51,7 @@ $$(document).on('deviceready', function(e) {
 
 $$(document).on('page:init', function (e) {
   console.log("Inicializado: Inicio genérico");
+
 });
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
@@ -62,7 +63,8 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
-  $$('#btn_guardarDatos').on('click', fnNuevoProducto);
+
+ 
 });
 
 $$(document).on('page:init', '.page[data-name="category"]', function (e) {
@@ -79,12 +81,16 @@ $$(document).on('page:init', '.page[data-name="list"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="register"]', function (e) {
   console.log("Inicializado: Registro");
-
+  
   $$('#btn_registrarse').on('click', fnRegistro);
 });
 
 $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
+  db = firebase.firestore();
+  refUsuario = db.collection(email_login);
+  
+  $$('#btn_guardarDatos').on('click', fnNuevoProducto);
 });
 
 
@@ -154,6 +160,8 @@ function fnCargaUsuario() {
 }
 
 function fnNuevoProducto() {
+
+  idProd = $$('#inpProdNuevo_Nombre').val();
   categoria = $$('#inpProdNuevo_Categoria').val();
   nombre = $$('#inpProdNuevo_Nombre').val();
   precio = $$('#inpProdNuevo_Precio').val();
@@ -164,8 +172,8 @@ function fnNuevoProducto() {
     precio: precio,
   }
 
-  refProducto.doc(email_login)
-    .set(data_prodNuevo);
+  refUsuario.doc(idProd).set(data_prodNuevo);
+  
 
   console.log("Producto ingresado");
   mainView.router.navigate("/menu/");

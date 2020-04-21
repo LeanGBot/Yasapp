@@ -6,26 +6,32 @@
 }
 .index_body {
     background-image: url(./img/FondoAPP.png) !important;
-    background-size: contain ;
+    background-size: cover ;
 }
-
 .menu-pag {
     background-image: url(./img/FondoAPP.png) !important;
-    background-size: contain !important;
+    background-size: cover !important;
 }
+.menu-pag-reg {
+    background-image: url(./img/FondoAPPreg.jpg) !important;
+    background-size: cover !important;
+}
+#index-reg {
+    font-weight: bolder;
+}
+#btn_registrarse {
+    height: 6%;
+    width: 50vw;
+    margin: auto;
+    top: 3vh;
+}
+
 #div_btn_init {
-    
     display: flex;
     justify-content: center;
     font-size: 25px;
     top: 50vh;
     position: relative;
-    /*border: chartreuse 2px solid;
-    left: 0;
-    top: 47.25%;
-    width: 90%;
-    text-align: center;
-    */
 }
 #btn_venta, #btn_nuevoProd {
     margin: 5vh 0 5vh 0;
@@ -39,8 +45,24 @@
     width: fit-content;
     height: 8vh;
 }
+#btn_nuevoProd {
+    animation-name: btn_nuevoProd;
+    animation-duration: 0.6s;
+    animation-delay: 0s;
+}
+@keyframes btn_nuevoProd {
+    0%   {left:99vw; top:10vh;}
+    100% {left:30vw; top:10vh;}
+}
 #btn_venta {
     left: 63vw;
+    animation-name: btn_venta;
+    animation-duration: 0.7s;
+    animation-delay: 0s;
+}
+@keyframes btn_venta {
+    0%   {left:99vw; top:10vh;}
+    100% {left:63vw; top:10vh;}
 }
 .usuarios_menu {
     border: chartreuse 2px solid;
@@ -52,8 +74,6 @@
     font-size: 20px;
 }
 .cont_login {
-    position: absolute;
-    left: 0;    
     margin: auto;
     text-align: center;
     width: 80%;
@@ -62,13 +82,17 @@
     margin-top: 20%;
 }
 .btn_login {
-    height: 6vh;
-    width: 50vw;
+    height: 6%;
+    width: 50%;
     margin: auto;
     top: 5vh;
 }
 .btn_regis {
-    margin-top: 24%;
+    margin-top: 20vh;
+    background: rgba(255, 254, 254, 0.39) ;
+    border-radius: 0 8vh 0 8vh;
+    box-shadow: rgb(163, 163, 163);
+
 }
 .list_regis {
     position: absolute;
@@ -95,7 +119,6 @@
     height: 70vw;
     margin: auto;
     margin-top: 8vh;
-    text-align: center;
     background-image: url(./img/LogoAPP.png)  !important;
     background-size: contain !important;
     background-repeat: no-repeat;
@@ -105,7 +128,6 @@
     width: 50vw;
 }
 
-/*Producto subcategoria*/
 .seccionProducto {
     margin: 0.5vh;
     display: flex;
