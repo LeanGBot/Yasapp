@@ -1,3 +1,11 @@
+
+#signUpGoogle {
+    background-color: red;
+    width: 10vw;
+    height: 10vw;
+    top: 80vh;
+    margin: auto;
+}
 .item-input-wrap {
     background-color: white;
 }
@@ -88,8 +96,8 @@
     top: 5vh;
 }
 .btn_regis {
-    margin-top: 20vh;
-    background: rgba(255, 254, 254, 0.39) ;
+    margin-top: 13vh;
+    background: rgba(255, 254, 254, 0.30) ;
     border-radius: 0 8vh 0 8vh;
     box-shadow: rgb(163, 163, 163);
 

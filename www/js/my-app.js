@@ -37,15 +37,15 @@ var app = new Framework7({
 });
 
 var mainView = app.views.create('.view-main');
-var login_email;
-var db, refUsuario;
+
+var email_login;
+var db, refUsuario, refCategoria, refProducto;
 var categoria, idProd, plantilla, catNueva, precio;
+
 
 $$(document).on('deviceready', function(e) {
   console.log("Inicializado: Dispositivo");
 
-  db = firebase.firestore();
-  refUsuario = db.collection(login_email);
  
 });
 
@@ -56,30 +56,24 @@ $$(document).on('page:init', function (e) {
 
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   console.log("Inicializado: Index");
-  login_email = $$('#login_email').val()
-
+  
   $$('#btn_registrarse').on('click', fnRegistro);
-  $$('#btn_login').on('click', fnLogin);
+  $$('#btn_login').on('click', fnLoginEmailPass);
+  $$('#signUpGoogle').on('click', fnLoginGoogle);
 });
 
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
-
- 
 });
 
 $$(document).on('page:init', '.page[data-name="category"]', function (e) {
   console.log("Inicializado: Categorias");
-
-  fnCargaUsuario();
-});
-
-$$(document).on('page:init', '.page[data-name="subcategory"]', function (e) {
-  console.log("Inicializado: SubCategoria");
 });
 
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
+  fnCargaUsuario();
+
 });
 
 $$(document).on('page:init', '.page[data-name="register"]', function (e) {
@@ -90,13 +84,18 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
-  db = firebase.firestore();
-  refUsuario = db.collection(login_email);
-  
+
+ 
+  /*
+  refUsuario = db.collection(email_login);
+  refCategoria = db.collection("USUARIOS").doc(email_login).collection("CATEGORIAS").doc(categoria);
+  refProducto = db.collection("USUARIOS").doc(email_login).collection("PRODUCTOS").doc(idProd);
+  */
+
+  console.log(email_login);
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#añadirCat').on('click', fnCrearCategoria);
 });
-
 
 /*Funciones*/
 function fnRegistro() {
@@ -123,47 +122,99 @@ function fnRegistro() {
   });
 }
 
-function fnLogin() {
+function fnLoginEmailPass() {
 
   email_login = $$('#login_email').val();
+
   var pass_login = $$('#login_pass').val();
+
   console.log(email_login);
   console.log(pass_login);
+
   var mostrarError = 0;
-      
   firebase.auth().signInWithEmailAndPassword(email_login, pass_login)
       .catch(function(error){
-          mostrarError = 1;
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorMessage);
-          console.log(errorCode);
-          
-          
-        })
+        mostrarError = 1;
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        console.log(errorCode);
+      })
         
       .then(function(){
         if (mostrarError == 1) {
-          switch (errorCode) {
-            case "auth/wrong-password":
-              console.log("Usuario o contraseña incorrecta");
-              break;
-            default:
-              break;
-          }  
           console.log("login incorrecto");
-      } else {
-        console.log("login correcto");
-        mainView.router.navigate("/menu/");
-      }
-    });
+        } else {
+          console.log("login correcto");
+          mainView.router.navigate("/menu/");
+        }
+      });
+}
+
+function fnLoginGoogle() {
+  /*console.log("Ingreso en funcion loginGoogle")
+  var provider = new firebase.auth.GoogleAuthProvider();
+ 
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+
+    var token = result.credential.accessToken;
+    var user = result.user;
+ 
+  }).catch(function(error) {
+ 
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log("logueado con google")
+
+    var email = error.email;
+    var credential = error.credential;
+  });
+ */
 }
 
 function fnCargaUsuario() {
-  
-  
 
+      // Referencia a la coleccion de ciudades
+ //     db = firebase.firestore();
+   //   var refProductos = db.collection(login_email).doc("productos");
+   
+      //("productos");
 
+      
+      /* 
+      TRAER TODAS LAS CAT
+      db.collection('USUARIOS').doc(email).collection('CATEGORIAS').get()
+          -> query snapshot 
+              -> forEACH {
+                    por cada categoria
+                    cat = EL NOMBRE DE LA CAT....
+
+                    db.collection('USUARIOS').doc(email).collection('PRODCUTOS').where('categoria','==', cat).limit(1)
+              }    
+      */
+/*
+     var db = firebase.firestore();
+         //pruebas *
+         refCategorias = db.collection('USUARIOS').doc(email_login).collection('CATEGORIAS').doc(categorias)
+         refProductos = db.collection('USUARIOS').doc(email_login).collection('PRODUCTOS ').doc(idProd)
+         //pruebas *
+         */     
+        
+        console.log("Ingreso en fnCargaUsuario");
+        console.log(email_login);
+        db = firebase.firestore();
+        refUsuario = db.collection('USUARIOS');
+        
+        refUsuario.get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+           console.log("data:" + doc.data());
+           console.log("dsakdlallll");
+          });
+        })
+        .catch(function(error) {
+          console.log("Error: ", error);
+        });
 
 }
 
@@ -175,16 +226,17 @@ function fnCrearCategoria() {
 function fnNuevoProducto() {
   
   idProd = $$('#inpProdNuevo_Nombre').val();
-  categoria = $$('#inpProdNuevo_Categoria').val();
   precio = $$('#inpProdNuevo_Precio').val();
+  categoria = $$('#inpProdNuevo_Categoria').val();
   
   var dataProducto = {
     nombre: idProd,
     precio: precio,
     categoria: categoria,
   }
-  
-  refUsuario.doc(idProd).set(dataProducto);
+ 
+  db = firebase.firestore();
+  db.collection('USUARIOS').doc(email_login).collection(categoria).doc(idProd).set(dataProducto);
   
   console.log("Producto añadido");
   mainView.router.navigate("/menu/");

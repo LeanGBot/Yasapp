@@ -25,42 +25,43 @@
           <!--cosas del popup-->
           <div class="tit_login login-screen-title"><p>Bienvenid@</p></div>
           <div class="list no-hairlines-md">
-             <ul style="background: none">
-                 <li class="cont_login item-content item-input color-blue item-input-outline">
-                 <div class="item-inner">
-                    <div class="item-title item-floating-label">Email</div>
-                    <div class="item-input-wrap">
-                      <input id="login_email" type="email" placeholder="Email" value="leandro.gbot@gmail.com" required>
-                    </div>
-                 </div>
-                 </li>
-
-                 <li class="cont_login item-content item-input item-input-outline">
-                 <div class="item-inner">
-                    <div class="item-title item-floating-label">Contraseña</div>
-                    <div class="item-input-wrap">
-                       <input id="login_pass" type="password" placeholder="Contraseña" value="123456" required>
-                    </div>
-                 </div>
-                 </li>
-                 
-                 <button id="btn_login" class="btn_login col button button-fill color-blue segmented-round-md">Ingresar</button>
-                 
-                 <!-- poner login con RS-->
-              </ul>
+            <ul style="background: none">
+              <li class="cont_login item-content item-input color-blue item-input-outline">
+                <div class="item-inner">
+                  <div class="item-title item-floating-label">Email</div>
+                  <div class="item-input-wrap">
+                    <input id="login_email" type="email" placeholder="Email" value="leandro.gbot@gmail.com" required>
+                  </div>
+                </div>
+              </li>
               
-              <div class="block">
-                <div class="row">
-                  <div class="btn_regis col">
-                    
-                    <p id="index-reg">¿No tienes una cuenta?<br><a href="/register/" class="link">Registrate!</a></p>
-                    
+              <li class="cont_login item-content item-input item-input-outline">
+                   <div class="item-inner">
+                     <div class="item-title item-floating-label">Contraseña</div>
+                     <div class="item-input-wrap">
+                       <input id="login_pass" type="password" placeholder="Contraseña" value="123456" required>
+                      </div>
+                    </div>
+                  </li>
+                  
+                  <button id="btn_login" class="btn_login col button button-fill color-blue segmented-round-md">Ingresar</button>
+                 <!-- poner login con RS-->
+                </ul>
+                
+                <div class="block">
+                  <div class="row">
+                    <div class="btn_regis col">
+                      
+                      <p id="index-reg">¿No tienes una cuenta?<br><a href="/register/" class="link">Registrate!</a></p>
+                      
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <p><strong>o registrate con</strong></p>
+              <div id="signUpGoogle"></div>
         <!--End page content-->
-        <p><a href="/menu/">[Test]</a></p>
+        <!--<p><a href="/menu/">[Test]</a></p>-->
       </div>
     </div>
     </div>
@@ -77,6 +78,12 @@
   <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
 
+
+  <!-- 
+  <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+-->
   <script>
     var firebaseConfig = {
       apiKey: "AIzaSyDBEK93jElO2rdp36yrw183lCdaBmBAZ0U",
