@@ -120,7 +120,7 @@ function fnRegistro() {
         mainView.router.navigate("/index/");
       }
   });
-}
+} //registro
 
 function fnLoginEmailPass() {
 
@@ -149,7 +149,7 @@ function fnLoginEmailPass() {
           mainView.router.navigate("/menu/");
         }
       });
-}
+} //login con email y pass
 
 function fnLoginGoogle() {
   /*console.log("Ingreso en funcion loginGoogle")
@@ -170,7 +170,7 @@ function fnLoginGoogle() {
     var credential = error.credential;
   });
  */
-}
+} //login con google (probar cambio de versiones)
 
 function fnCargaUsuario() {
 
@@ -192,19 +192,22 @@ function fnCargaUsuario() {
                     db.collection('USUARIOS').doc(email).collection('PRODCUTOS').where('categoria','==', cat).limit(1)
               }    
       */
-/*
-     var db = firebase.firestore();
-         //pruebas *
-         refCategorias = db.collection('USUARIOS').doc(email_login).collection('CATEGORIAS').doc(categorias)
-         refProductos = db.collection('USUARIOS').doc(email_login).collection('PRODUCTOS ').doc(idProd)
-         //pruebas *
-         */     
+   
         
         console.log("Ingreso en fnCargaUsuario");
         console.log(email_login);
         db = firebase.firestore();
         refUsuario = db.collection('USUARIOS');
-        
+
+
+
+var mailRef = db.collection(email_login);
+var query = mailRef.where("precio", ">", 1);
+console.log(query);
+
+
+
+/*        
         refUsuario.get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -215,13 +218,27 @@ function fnCargaUsuario() {
         .catch(function(error) {
           console.log("Error: ", error);
         });
+*/
+} //Seccion que se ejecuta en la carga de productos segun su categoria 
 
-}
+function fnReferencias() {
+  db = firebase.firestore();
+  refUsuario = db.collection('USUARIO')
+  refProducto = db.collection('PRODUCTO')
+  refCategoria = db.collection('CATEGORIA')
+} //Referencias a invocar
 
 function fnCrearCategoria() {
   console.log("ingreso en fnCrearCategoria")
+  fnReferencias();
 
-}
+
+
+
+
+
+
+} //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
 function fnNuevoProducto() {
   
@@ -235,9 +252,11 @@ function fnNuevoProducto() {
     categoria: categoria,
   }
  
-  db = firebase.firestore();
-  db.collection('USUARIOS').doc(email_login).collection(categoria).doc(idProd).set(dataProducto);
+  //fnReferencias();
   
+  //db.collection('USUARIOS').doc(email_login).collection(categoria).doc(idProd).set(dataProducto);
+
+
   console.log("Producto añadido");
   mainView.router.navigate("/menu/");
-}
+} //Seccion encargada de escribir las colecciones y documentos en la DB
