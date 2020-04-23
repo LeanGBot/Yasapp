@@ -97,7 +97,7 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnSelectedValue);
- 
+  $$('#fotoProd').on('click', fnFoto);
 
   fnListaCategoria();
 });
@@ -179,8 +179,36 @@ function fnLoginGoogle() {
 
 function fnCargaUsuario() {
 
+  db = firebase.firestore();
+  refCategoria = db.collection(email_login).doc("CATEGORIAS");
+
+  refCategoria.get()
+  .then(function(doc){
+    if (doc.exists) {
+      var categoriasCreadas = doc.data().cat;
+      console.log(categoriasCreadas);
+    }
+    for (i=0; i<categoriasCreadas.length; i++) {
+      var tit_cat = '<div class="list_' + categoriasCreadas[i] + '">';
+      $$('#seccion_categoria').append(tit_cat);
+      //poner for para productos      
+    };
+  })
+  .catch(function(error){
+    console.log("Error: " + error);
+  });
+
+  for (j=0; j<filas; j++) {
+    datos = '<div class="row">';
+    for (i=0; i<columnas; i++) {
+      datos += '<div class="col tocoCol" id="col_'+j+'_'+i+'">'+i+'</div>';
+    }
+    datos += '</div>';
+    $$('#grilla').append(datos);
+  }
+
       // Referencia a la coleccion de ciudades
- //     db = firebase.firestore();
+    //     db = firebase.firestore();
    //   var refProductos = db.collection(login_email).doc("productos");
    
       //("productos");
@@ -196,7 +224,7 @@ function fnCargaUsuario() {
 
                     db.collection('USUARIOS').doc(email).collection('PRODCUTOS').where('categoria','==', cat).limit(1)
               }    
-      */
+      
    
         
         console.log("Ingreso en fnCargaUsuario");
@@ -212,7 +240,7 @@ console.log(query);
 
 
 
-/*        
+      
         refUsuario.get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
@@ -268,10 +296,8 @@ function fnListaCategoria() {
       console.log(categoriasCreadas);
     }
     for (i=0; i<categoriasCreadas.length; i++) {
-      var tst1 = '<option value="'+ i +'">' + categoriasCreadas[i] + '</option>';
-      var tst2 = "<option value='"+ categoriasCreadas[i] +"'>" + categoriasCreadas[i] + "</option>";
-      $$('#selectCat').append(tst2);
-      console.log(tst2);
+      var listado = "<option value='"+ categoriasCreadas[i] +"'>" + categoriasCreadas[i] + "</option>";
+      $$('#selectCat').append(listado);
     };
   })
   .catch(function(error){
@@ -306,20 +332,44 @@ function fnNuevoProducto() {
   mainView.router.navigate("/menu/");
 } //Seccion encargada de escribir las colecciones y documentos en la DB
 
-function fnFoto(){
-  function getImage() { 
-    navigator.camera.getPicture(onSuccess,onError,
-    {
-      quality: 50,
-      destinationType: Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.CAMERA
-    });
-  }
-  
+function fnFoto() {
+  navigator.camera.getPicture(onSuccess,onError,
+  {
+    quality: 50,
+    destinationType: Camera.DestinationType.FILE_URI,
+    sourceType: Camera.PictureSourceType.CAMERA
+  });
 } //Seccion de captura de imagenes (por hacer)
+function onError() {
+  console.log("error camara");
+} //onError camara
+function onSuccess(imageData) {
+  var image = document.getElementById('myImage');
+  image.src = imageURI;
+} //onSuccess camara
 
 function fnSelectedValue(){
   var e = document.getElementById("selectCat").value;
   console.log(e);
 
 } //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
+
+function fnListaProductos() {
+  db = firebase.firestore();
+  refCategoria = db.collection(email_login).doc("PRODUCTOS");
+
+  refCategoria.get()
+  .then(function(doc){
+    if (doc.exists) {
+      var categoriasCreadas = doc.data().cat;
+      console.log(categoriasCreadas);
+    }
+    for (i=0; i<categoriasCreadas.length; i++) {
+      var listado = "<option value='"+ categoriasCreadas[i] +"'>" + categoriasCreadas[i] + "</option>";
+      $$('#selectCat').append(listado);
+    };
+  })
+  .catch(function(error){
+    console.log("Error: " + error);
+  });
+} //Funcion que genera la lista de categorias

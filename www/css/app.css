@@ -1,4 +1,9 @@
-
+#fotoProd {
+    width: 20vw;
+    height: 20vw;
+    background-color: rebeccapurple;
+    margin: auto;
+}
 #signUpGoogle {
     background-color: red;
     width: 10vw;
