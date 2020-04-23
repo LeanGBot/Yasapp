@@ -40,7 +40,7 @@ var mainView = app.views.create('.view-main');
 
 var email_login;
 var db, refUsuario, refCategoria, refProducto;
-var categoria, idProd, plantilla, catNueva, precio;
+var categoria, idProd, catNueva, precio;
 
 
 $$(document).on('deviceready', function(e) {
@@ -85,16 +85,9 @@ $$(document).on('page:init', '.page[data-name="register"]', function (e) {
 $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
 
- 
-  /*
-  refUsuario = db.collection(email_login);
-  refCategoria = db.collection("USUARIOS").doc(email_login).collection("CATEGORIAS").doc(categoria);
-  refProducto = db.collection("USUARIOS").doc(email_login).collection("PRODUCTOS").doc(idProd);
-  */
-
-  console.log(email_login);
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#añadirCat').on('click', fnCrearCategoria);
+
 });
 
 /*Funciones*/
@@ -219,28 +212,57 @@ console.log(query);
           console.log("Error: ", error);
         });
 */
-} //Seccion que se ejecuta en la carga de productos segun su categoria 
-
-function fnReferencias() {
-  db = firebase.firestore();
-  refUsuario = db.collection('USUARIO')
-  refProducto = db.collection('PRODUCTO')
-  refCategoria = db.collection('CATEGORIA')
-} //Referencias a invocar
+} //Seccion que se ejecuta en la carga de productos segun su categoria
 
 function fnCrearCategoria() {
-  console.log("ingreso en fnCrearCategoria")
-  fnReferencias();
-
-
-
-
-
+  db = firebase.firestore();
+  refCategoria = db.collection(email_login).doc("CATEGORIAS");
+  var nuevaCategoria = $$('#inpNuevaCategoria').val();
+  
+  refCategoria.get()
+  .then(function(doc) {
+    if (doc.exists) {
+      refCategoria.update({
+        cat: firebase.firestore.FieldValue.arrayUnion(nuevaCategoria)
+      });
+      console.log("Nuevo ingreso creado")
+      fnListaCategoria();
+    } else {
+      refCategoria.set({
+        cat: [nuevaCategoria],
+      })
+      .then(function() {
+        console.log("Documento creado");
+      })
+      .catch(function(error) {
+        console.log("Error: ", error);
+      });
+    }
+  }).catch(function(error) {
+    console.log("Error:", error);
+  });
 
 
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
+function fnListaCategoria() {
+  db = firebase.firestore();
+  refCategoria = db.collection(email_login).doc("CATEGORIAS");
+
+  refCategoria.get()
+  .then(function(doc){
+    if (doc.exists) {
+      var categoriasCreadas = doc.data().cat;
+      console.log(categoriasCreadas);
+    }
+  })
+  .catch(function(error){
+    console.log("Error: " + error);
+  });
+} //Funcion que genera la lista de categorias
+
 function fnNuevoProducto() {
+  fnReferencias();
   
   idProd = $$('#inpProdNuevo_Nombre').val();
   precio = $$('#inpProdNuevo_Precio').val();
@@ -248,15 +270,22 @@ function fnNuevoProducto() {
   
   var dataProducto = {
     nombre: idProd,
-    precio: precio,
     categoria: categoria,
+    precio: precio,
   }
- 
-  //fnReferencias();
+
+  refProducto.set(dataProducto)
+  .then(function(){
+    console.log("Data ingresada con exito!");
+  })
+  .catch(function(error){
+    console.log("error setteo dataProducto");
+  })
   
-  //db.collection('USUARIOS').doc(email_login).collection(categoria).doc(idProd).set(dataProducto);
-
-
   console.log("Producto añadido");
   mainView.router.navigate("/menu/");
 } //Seccion encargada de escribir las colecciones y documentos en la DB
+
+function fnFoto(){
+
+} //Seccion de captura de imagenes
