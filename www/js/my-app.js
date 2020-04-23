@@ -42,7 +42,7 @@ var app = new Framework7({
 
 var mainView = app.views.create('.view-main');
 
-var email_login, e;
+var email_login;
 var db, refUsuario, refCategoria, refProducto;
 var categoria, idProd, catNueva, precio;
 
@@ -268,8 +268,10 @@ function fnListaCategoria() {
       console.log(categoriasCreadas);
     }
     for (i=0; i<categoriasCreadas.length; i++) {
-      $$('#selectCat').append('<option value="'+ categoriasCreadas[i] +'">'+ categoriasCreadas[i] +'</option>');
-      console.log('<option value="'+ categoriasCreadas[i] +'">'+ categoriasCreadas[i] +'</option>');
+      var tst1 = '<option value="'+ i +'">' + categoriasCreadas[i] + '</option>';
+      var tst2 = "<option value='"+ categoriasCreadas[i] +"'>" + categoriasCreadas[i] + "</option>";
+      $$('#selectCat').append(tst2);
+      console.log(tst2);
     };
   })
   .catch(function(error){
@@ -305,12 +307,19 @@ function fnNuevoProducto() {
 } //Seccion encargada de escribir las colecciones y documentos en la DB
 
 function fnFoto(){
-
-} //Seccion de captura de imagenes
+  function getImage() { 
+    navigator.camera.getPicture(onSuccess,onError,
+    {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: Camera.PictureSourceType.CAMERA
+    });
+  }
+  
+} //Seccion de captura de imagenes (por hacer)
 
 function fnSelectedValue(){
-  var e = $$('#selectCat').value;
-  var e = $$('#selectCat_n').value;
-  console.log(e + " 1");
-  console.log(e + " 2");
+  var e = document.getElementById("selectCat").value;
+  console.log(e);
+
 } //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
