@@ -33,7 +33,12 @@
     margin: auto;
     top: 3vh;
 }
-
+#page-añadirCat {
+    margin: auto;
+    width: 60vw;
+    top: 20%;
+    font-size: 14px;
+}
 #div_btn_init {
     display: flex;
     justify-content: center;
@@ -90,8 +95,9 @@
     margin-top: 20%;
 }
 .btn_login {
-    height: 6%;
-    width: 50%;
+    font-size: 3vh;
+    height: 8vh;
+    width: 50vw;
     margin: auto;
     top: 5vh;
 }
@@ -117,6 +123,16 @@
     margin-top: 10vh;
     text-align: center;
 }
+.list_add_nc {
+    margin: auto;
+    width: 80vw;
+    top: 10vh;
+}
+#btn_añadirCat {
+    width: 50vw;
+    margin: auto;
+    margin-top: 5vh;
+}
 .btn_regis_conf {
     margin: auto;
     top: 70vh;
@@ -128,6 +144,15 @@
     margin: auto;
     margin-top: 8vh;
     background-image: url(./img/LogoAPP.png)  !important;
+    background-size: contain !important;
+    background-repeat: no-repeat;
+}
+.contInfobox {
+    width: 90vw;
+    height: 55vw;
+    margin: auto;
+    margin-top: 35vh;
+    background-image: url(./img/infobox.png)  !important;
     background-size: contain !important;
     background-repeat: no-repeat;
 }

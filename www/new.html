@@ -36,9 +36,8 @@
       <div class="item-inner">
         <div class="item-title item-floating-label">Categoria</div>
         <div class="item-input-wrap">
-          <select name="selectCat" id="selectCat">
-            <option value="1">asd</option>
-            <option value="2">ddsa</option>
+          <select name="selectCat_n" id="selectCat" onchange="fnSelectedValue(this.value)">
+            
           </select>
         </div>
       </div>
@@ -49,27 +48,12 @@
   
 </div>
 
+
 <div class="btn_guardarDatos">
-<button id="btn_guardarDatos" class="col button button-fill color-green segmented-round-md"><strong>+</strong> Añadir</button>
-</div>
-
-<div class="list no-hairlines-md list_add">
-<ul style="background: none">
-<li class="item-content item-input item-input-outline">
-  <div class="item-inner">
-    <div class="item-title item-floating-label">Crear categoría</div>
-    <div class="item-input-wrap">
-      <input id="inpNuevaCategoria" type="text" placeholder="Ej: Mobiliario">
-      <span class="input-clear-button"></span>
-      <div class="btn_añadirCat"><button id="añadirCat" class="col button button-fill">+</button></div>
-    </div>
-  </div>
-</li>
-</ul>
+  <button id="btn_guardarDatos" class="col button button-fill color-green segmented-round-md"><strong style="font-size:20px">+</strong> Añadir</button>
 </div>
 
 
-
-
+<a class="button button-fill button-raised color-blue button-small" id="page-añadirCat" href="/newcateg/">Crear categoria nueva</a>
 <!--END Page-->
 </div>

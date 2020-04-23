@@ -32,13 +32,17 @@ var app = new Framework7({
       path: '/register/',
       url: 'register.html',
     },
+    {
+      path: '/newcateg/',
+      url: 'newcateg.html',
+    },
   ]
   // ... other parameters
 });
 
 var mainView = app.views.create('.view-main');
 
-var email_login;
+var email_login, e;
 var db, refUsuario, refCategoria, refProducto;
 var categoria, idProd, catNueva, precio;
 
@@ -70,6 +74,12 @@ $$(document).on('page:init', '.page[data-name="category"]', function (e) {
   console.log("Inicializado: Categorias");
 });
 
+$$(document).on('page:init', '.page[data-name="newcateg"]', function (e) {
+  console.log("Inicializado: Crear Categoria");
+  $$('#btn_añadirCat').on('click', fnCrearCategoria);
+
+});
+
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
   fnCargaUsuario();
@@ -86,8 +96,10 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
-  $$('#añadirCat').on('click', fnCrearCategoria);
+  $$('#selectCat').on('change', fnSelectedValue);
+ 
 
+  fnListaCategoria();
 });
 
 /*Funciones*/
@@ -145,20 +157,20 @@ function fnLoginEmailPass() {
 } //login con email y pass
 
 function fnLoginGoogle() {
-  /*console.log("Ingreso en funcion loginGoogle")
+  /*console.log("Ingreso en fnLoginGoogle")
   var provider = new firebase.auth.GoogleAuthProvider();
  
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-
+  firebase.auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
     var token = result.credential.accessToken;
     var user = result.user;
- 
+    console.log("logueado con google")
   }).catch(function(error) {
- 
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log("logueado con google")
-
+    console.log(Cod: errorCode);
+    console.log(Msj: errorMessage);
     var email = error.email;
     var credential = error.credential;
   });
@@ -233,6 +245,7 @@ function fnCrearCategoria() {
       })
       .then(function() {
         console.log("Documento creado");
+        fnListaCategoria();
       })
       .catch(function(error) {
         console.log("Error: ", error);
@@ -241,7 +254,6 @@ function fnCrearCategoria() {
   }).catch(function(error) {
     console.log("Error:", error);
   });
-
 
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
@@ -255,6 +267,10 @@ function fnListaCategoria() {
       var categoriasCreadas = doc.data().cat;
       console.log(categoriasCreadas);
     }
+    for (i=0; i<categoriasCreadas.length; i++) {
+      $$('#selectCat').append('<option value="'+ categoriasCreadas[i] +'">'+ categoriasCreadas[i] +'</option>');
+      console.log('<option value="'+ categoriasCreadas[i] +'">'+ categoriasCreadas[i] +'</option>');
+    };
   })
   .catch(function(error){
     console.log("Error: " + error);
@@ -262,8 +278,10 @@ function fnListaCategoria() {
 } //Funcion que genera la lista de categorias
 
 function fnNuevoProducto() {
-  fnReferencias();
-  
+
+  db = firebase.firestore();
+  refProducto = db.collection(email_login).doc("PRODUCTOS");
+
   idProd = $$('#inpProdNuevo_Nombre').val();
   precio = $$('#inpProdNuevo_Precio').val();
   categoria = $$('#inpProdNuevo_Categoria').val();
@@ -289,3 +307,10 @@ function fnNuevoProducto() {
 function fnFoto(){
 
 } //Seccion de captura de imagenes
+
+function fnSelectedValue(){
+  var e = $$('#selectCat').value;
+  var e = $$('#selectCat_n').value;
+  console.log(e + " 1");
+  console.log(e + " 2");
+} //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
