@@ -29,7 +29,7 @@
       <div class="item-inner">
         <div class="item-title item-floating-label">Precio</div>
         <div class="item-input-wrap">
-          <input id="inpProdNuevo_Precio" type="number" placeholder="$" required>
+          <input id="inpProdNuevo_Precio" type="number" placeholder="$" onkeyup="this.value=fnValidacionNumerica(this.value)" required>
           <span class="input-clear-button"></span>
         </div>
       </div>

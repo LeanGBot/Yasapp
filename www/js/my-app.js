@@ -339,9 +339,23 @@ function fnListaProductos() {
   });
 } //Funcion que genera la lista visual de productos ingresados en /list/
 
-function fnValidacionCategoria() {
-  
-}
+function fnValidacionNumerica(numero) {
+  var out = '';
+  var filtro = '1234567890';
+  for (var i=0; i<numero.length; i++)
+    if (filtro.indexOf(numero.charAt(i)) != -1) 
+    out += numero.charAt(i);
+  return out;
+} //Funcion para eliminar espacios, y limitar a numeros y letras
+
+function fnValidacionAlfanumerica(palabra) {
+  var out = '';
+  var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';
+  for (var i=0; i<palabra.length; i++)
+    if (filtro.indexOf(palabra.charAt(i)) != -1) 
+    out += palabra.charAt(i);
+  return out;
+} //Funcion para eliminar espacios, y limitar a numeros y letras
 
 function fnFoto() {
   navigator.camera.getPicture(onSuccess,onError,
