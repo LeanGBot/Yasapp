@@ -172,6 +172,14 @@
     align-items: center;
     justify-content: center;
 }
+/*.dyn_cat > div{
+
+    font-weight: bolder;
+    padding: 1vh 0 1vh 7vw;
+    border-bottom: 2px gray solid;
+    font-size: 3vh;
+    color: darkslategray;
+} */  
 .btn_decremento, .btn_incremento {
     padding: 1%;
     width: 10vw;
@@ -208,12 +216,4 @@
     align-items: center;
     justify-content: center;
 }
-.tituloCategoria {
-    background-color: rgb(131, 210, 241);
-    font-weight: bolder;
-    padding: 1vh 0 1vh 7vw;
-    border-bottom: 2px gray solid;
-    font-size: 3vh;
-    color: darkslategray;
-}   
 

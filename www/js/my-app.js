@@ -44,7 +44,7 @@ var mainView = app.views.create('.view-main');
 
 var email_login;
 var db, refUsuario, refCategoria, refProducto;
-var categoria, idProd, catNueva, precio;
+var categoria, idProd, catNueva, precio, cSel;
 
 
 $$(document).on('deviceready', function(e) {
@@ -83,7 +83,6 @@ $$(document).on('page:init', '.page[data-name="newcateg"]', function (e) {
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
   fnCargaUsuario();
-
 });
 
 $$(document).on('page:init', '.page[data-name="register"]', function (e) {
@@ -96,7 +95,7 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
-  $$('#selectCat').on('change', fnSelectedValue);
+  $$('#selectCat').on('change', fnValorSeleccion);
   $$('#fotoProd').on('click', fnFoto);
 
   fnListaCategoria();
@@ -178,80 +177,51 @@ function fnLoginGoogle() {
 } //login con google (probar cambio de versiones)
 
 function fnCargaUsuario() {
-
   db = firebase.firestore();
+  refProducto = db.collection(email_login).doc("PRODUCTOS");
   refCategoria = db.collection(email_login).doc("CATEGORIAS");
+  refColProd = db.collection(email_login);
 
   refCategoria.get()
   .then(function(doc){
     if (doc.exists) {
       var categoriasCreadas = doc.data().cat;
       console.log(categoriasCreadas);
+      
+      for (c=0; c<categoriasCreadas.length; c++) {
+        var listado_cat = "<div class='seccionCategoria' id='dyn_"+categoriasCreadas[c]+"'><strong>"+categoriasCreadas[c]+"</strong></div>";
+        $$('#dyn_cat').append(listado_cat);
+      };
     }
-    for (i=0; i<categoriasCreadas.length; i++) {
-      var tit_cat = '<div class="list_' + categoriasCreadas[i] + '">';
-      $$('#seccion_categoria').append(tit_cat);
-      //poner for para productos      
-    };
   })
   .catch(function(error){
-    console.log("Error: " + error);
+    console.log("ErrorRef: " + error);
   });
-
-  for (j=0; j<filas; j++) {
-    datos = '<div class="row">';
-    for (i=0; i<columnas; i++) {
-      datos += '<div class="col tocoCol" id="col_'+j+'_'+i+'">'+i+'</div>';
-    }
-    datos += '</div>';
-    $$('#grilla').append(datos);
-  }
-
-      // Referencia a la coleccion de ciudades
-    //     db = firebase.firestore();
-   //   var refProductos = db.collection(login_email).doc("productos");
-   
-      //("productos");
-
-      
-      /* 
-      TRAER TODAS LAS CAT
-      db.collection('USUARIOS').doc(email).collection('CATEGORIAS').get()
-          -> query snapshot 
-              -> forEACH {
-                    por cada categoria
-                    cat = EL NOMBRE DE LA CAT....
-
-                    db.collection('USUARIOS').doc(email).collection('PRODCUTOS').where('categoria','==', cat).limit(1)
-              }    
-      
-   
-        
-        console.log("Ingreso en fnCargaUsuario");
-        console.log(email_login);
-        db = firebase.firestore();
-        refUsuario = db.collection('USUARIOS');
-
-
-
-var mailRef = db.collection(email_login);
-var query = mailRef.where("precio", ">", 1);
-console.log(query);
-
-
-
-      
-        refUsuario.get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-           console.log("data:" + doc.data());
-           console.log("dsakdlallll");
-          });
-        })
-        .catch(function(error) {
-          console.log("Error: ", error);
-        });
-*/
+  
+        refColProd
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+            console.log(doc.data().nombre, doc.data().precio, doc.data().categoria);
+            nCategoria = "#dyn_"+doc.data().categoria;
+            $$(nCategoria)
+              .append(
+                "<div class='seccionProducto'>" +  
+                  "<div class='btn_decremento'><button id='btn_decr1' class='col button color-red button-fill'>-</button></div>" +
+                  "<div class='prodPic'>foto</div>" +
+                  "<div class='prodEspecificacion'>" +
+                    "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
+                    "<div>"+doc.data().precio+"</div>" +
+                    "<div>0</div>" +
+                    "<div>0</div>" +
+                  "</div>" +
+                  "<div class='btn_incremento'><button id='btn_incr1' class='col button button-fill'>+</button></div>" +
+                "</div>" +
+                "<hr>"
+              );
+            });
+          })
+          .catch(function(error){console.log("Error en refProducto")});
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
 function fnCrearCategoria() {
@@ -285,6 +255,40 @@ function fnCrearCategoria() {
 
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
+function fnNuevoProducto() {
+
+  db = firebase.firestore();
+  refProducto = db.collection(email_login).doc("PRODUCTOS");
+  refColProd = db.collection(email_login);  
+
+  idProd = $$('#inpProdNuevo_Nombre').val();
+  precio = $$('#inpProdNuevo_Precio').val();
+  categoria = document.getElementById("selectCat").value;
+  
+  var dataProducto = {
+    nombre: idProd,
+    categoria: categoria,
+    precio: precio,
+  }
+
+  refColProd.doc(idProd).set(dataProducto)
+  .then(function(){
+    console.log("Data ingresada con exito!");
+  })
+  .catch(function(error){
+    console.log("error setteo dataProducto");
+  })
+  
+  console.log("Producto añadido");
+  mainView.router.navigate("/menu/");
+} //Seccion encargada de escribir las colecciones y documentos en la DB  --Listo--
+
+function fnValorSeleccion(){
+  var cSel = document.getElementById("selectCat").value;
+  console.log(cSel);
+  
+} //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
+
 function fnListaCategoria() {
   db = firebase.firestore();
   refCategoria = db.collection(email_login).doc("CATEGORIAS");
@@ -305,32 +309,39 @@ function fnListaCategoria() {
   });
 } //Funcion que genera la lista de categorias
 
-function fnNuevoProducto() {
-
+function fnListaProductos() {
   db = firebase.firestore();
   refProducto = db.collection(email_login).doc("PRODUCTOS");
+  refCategoria = db.collection(email_login).doc("CATEGORIAS");
+  refColProd = db.collection(email_login);
 
-  idProd = $$('#inpProdNuevo_Nombre').val();
-  precio = $$('#inpProdNuevo_Precio').val();
-  categoria = $$('#inpProdNuevo_Categoria').val();
-  
-  var dataProducto = {
-    nombre: idProd,
-    categoria: categoria,
-    precio: precio,
-  }
+  refCategorias.get()
+  .then(function(doc){
+    if (doc.exists) {
+      var categoriasCreadas = doc.data().cat;
+      console.log(categoriasCreadas);
+    }
+    for (c=0; c<categoriasCreadas.length; c++) {
+      var listado_cat = "<div id='"+ categoriasCreadas[i] +"'></div>";
+      $$('#dyn_cat').append(listado_cat);
+      refColProd.get()
+      for (p=0; c<productosCreados.length; p++) {
+        var productosCreados = doc.data().cat;
+        var listado_prod = refProducto.where("cat","==", categoriasCreadas[i]);
+        $$("#dyn_"+ categoriasCreadas[i]).append(listado_prod);
+      }
 
-  refProducto.set(dataProducto)
-  .then(function(){
-    console.log("Data ingresada con exito!");
+      
+    };
   })
   .catch(function(error){
-    console.log("error setteo dataProducto");
-  })
+    console.log("Error: " + error);
+  });
+} //Funcion que genera la lista visual de productos ingresados en /list/
+
+function fnValidacionCategoria() {
   
-  console.log("Producto añadido");
-  mainView.router.navigate("/menu/");
-} //Seccion encargada de escribir las colecciones y documentos en la DB
+}
 
 function fnFoto() {
   navigator.camera.getPicture(onSuccess,onError,
@@ -340,36 +351,12 @@ function fnFoto() {
     sourceType: Camera.PictureSourceType.CAMERA
   });
 } //Seccion de captura de imagenes (por hacer)
+function onSuccess(imageData) {
+  var image = document.getElementById('fotoProd');
+  image.src = imageURI;
+  console.log(imageURI);
+  console.log(image.src);
+} //onSuccess camara
 function onError() {
   console.log("error camara");
 } //onError camara
-function onSuccess(imageData) {
-  var image = document.getElementById('myImage');
-  image.src = imageURI;
-} //onSuccess camara
-
-function fnSelectedValue(){
-  var e = document.getElementById("selectCat").value;
-  console.log(e);
-
-} //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
-
-function fnListaProductos() {
-  db = firebase.firestore();
-  refCategoria = db.collection(email_login).doc("PRODUCTOS");
-
-  refCategoria.get()
-  .then(function(doc){
-    if (doc.exists) {
-      var categoriasCreadas = doc.data().cat;
-      console.log(categoriasCreadas);
-    }
-    for (i=0; i<categoriasCreadas.length; i++) {
-      var listado = "<option value='"+ categoriasCreadas[i] +"'>" + categoriasCreadas[i] + "</option>";
-      $$('#selectCat').append(listado);
-    };
-  })
-  .catch(function(error){
-    console.log("Error: " + error);
-  });
-} //Funcion que genera la lista de categorias
