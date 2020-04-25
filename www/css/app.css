@@ -24,6 +24,7 @@
 .menu-pag {
     background-image: url(./img/FondoAPP.png) !important;
     background-size: cover !important;
+    overflow: scroll;
 }
 .menu-pag-reg {
     background-image: url(./img/FondoAPPreg.jpg) !important;
@@ -58,7 +59,7 @@
     font-size: 20px;
     top: 10vh;
     position: relative;
-    padding: 0 10vw 0;
+    padding: 0 7vw 0;
     left: 30vw;
     width: fit-content;
     height: 8vh;
@@ -73,14 +74,14 @@
     100% {left:30vw; top:10vh;}
 }
 #btn_venta {
-    left: 63vw;
+    left: 70vw;
     animation-name: btn_venta;
     animation-duration: 0.7s;
     animation-delay: 0s;
 }
 @keyframes btn_venta {
     0%   {left:99vw; top:10vh;}
-    100% {left:63vw; top:10vh;}
+    100% {left:70vw; top:10vh;}
 }
 .usuarios_menu {
     border: chartreuse 2px solid;
@@ -172,18 +173,10 @@
     align-items: center;
     justify-content: center;
 }
-/*.dyn_cat > div{
-
-    font-weight: bolder;
-    padding: 1vh 0 1vh 7vw;
-    border-bottom: 2px gray solid;
-    font-size: 3vh;
-    color: darkslategray;
-} */  
 .btn_decremento, .btn_incremento {
-    padding: 1%;
-    width: 10vw;
-    height: 10vw;
+    
+    width: 14vw;
+    height: 14vw;
     display: flex;
     align-items: center;
     justify-content: center;

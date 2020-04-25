@@ -236,7 +236,7 @@ function fnCrearCategoria() {
         cat: firebase.firestore.FieldValue.arrayUnion(nuevaCategoria)
       });
       console.log("Nuevo ingreso creado")
-      fnListaCategoria();
+      mainView.router.navigate("/menu/");
     } else {
       refCategoria.set({
         cat: [nuevaCategoria],
@@ -278,9 +278,7 @@ function fnNuevoProducto() {
   .catch(function(error){
     console.log("error setteo dataProducto");
   })
-  
   console.log("Producto añadido");
-  mainView.router.navigate("/menu/");
 } //Seccion encargada de escribir las colecciones y documentos en la DB  --Listo--
 
 function fnValorSeleccion(){
@@ -374,3 +372,5 @@ function onSuccess(imageData) {
 function onError() {
   console.log("error camara");
 } //onError camara
+
+
