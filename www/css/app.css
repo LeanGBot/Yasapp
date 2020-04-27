@@ -1,3 +1,6 @@
+.button .ripple-wave {
+    background-color: #7a47a3;
+  }
 #fotoProd {
     width: 20vw;
     height: 20vw;
@@ -64,25 +67,7 @@
     width: fit-content;
     height: 8vh;
 }
-#btn_nuevoProd {
-    animation-name: btn_nuevoProd;
-    animation-duration: 0.6s;
-    animation-delay: 0s;
-}
-@keyframes btn_nuevoProd {
-    0%   {left:99vw; top:10vh;}
-    100% {left:30vw; top:10vh;}
-}
-#btn_venta {
-    left: 70vw;
-    animation-name: btn_venta;
-    animation-duration: 0.7s;
-    animation-delay: 0s;
-}
-@keyframes btn_venta {
-    0%   {left:99vw; top:10vh;}
-    100% {left:70vw; top:10vh;}
-}
+
 .usuarios_menu {
     border: chartreuse 2px solid;
     position: relative;
@@ -168,15 +153,18 @@
 }
 
 .seccionProducto {
+    padding: 0 ;
     margin: 0.5vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(255, 254, 254, 0.30);
 }
 .btn_decremento, .btn_incremento {
     
     width: 14vw;
-    height: 14vw;
+    height: 17vh;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,7 +178,8 @@
     justify-content: center;
 }
 .prodPic {
-    margin-left: 4vw;
+    margin: 2vh 4vw 2vh 4vw;
+    
     box-shadow: rgb(163, 163, 163);
     border-radius: 15%;
     width: 28vw;
@@ -209,4 +198,35 @@
     align-items: center;
     justify-content: center;
 }
-
+/*Animaciones*/
+.fadeListaProd {
+    animation-name: fadeListaProd;
+    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+@-webkit-keyframes fadeListaProd {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@keyframes fadeListaProd {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+#btn_nuevoProd {
+    animation-name: btn_nuevoProd;
+    animation-duration: 0.6s;
+    animation-delay: 0s;
+}
+@keyframes btn_nuevoProd {
+    0%   {left:99vw; top:10vh;}
+    100% {left:30vw; top:10vh;}
+}
+#btn_venta {
+    left: 70vw;
+    animation-name: btn_venta;
+    animation-duration: 0.7s;
+    animation-delay: 0s;
+}
+@keyframes btn_venta {
+    0%   {left:99vw; top:10vh;}
+    100% {left:70vw; top:10vh;}
+}

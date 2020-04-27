@@ -96,7 +96,7 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnValorSeleccion);
-  $$('#fotoProd').on('click', fnFoto);
+  //$$('#fotoProd').on('click', fnFoto);
 
   fnListaCategoria();
 });
@@ -182,7 +182,8 @@ function fnCargaUsuario() {
   refCategoria = db.collection(email_login).doc("CATEGORIAS");
   refColProd = db.collection(email_login);
 
-  refCategoria.get()
+  refCategoria
+  .get()
   .then(function(doc){
     if (doc.exists) {
       var categoriasCreadas = doc.data().cat;
@@ -199,31 +200,35 @@ function fnCargaUsuario() {
   });
   
         refColProd
-          .get()
-          .then(function(querySnapshot) {
-            querySnapshot.forEach(function(doc) {
-            console.log(doc.data().nombre, doc.data().precio, doc.data().categoria);
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            console.log(doc.data());
+            console.log(doc.data().length);
+          
             nCategoria = "#dyn_"+doc.data().categoria;
+       
             $$(nCategoria)
-              .append(
-                "<div class='seccionProducto'>" +  
-                  "<div class='btn_decremento'><button id='btn_decr1' class='col button color-red button-fill'>-</button></div>" +
-                  "<div class='prodPic'>foto</div>" +
+            .append(
+               "<div class='seccionProducto'>" +  
+                "<div class='btn_decremento'><button onclick='fnCantidad(this.id)' id='d_"+doc.data().id+"' class='col button color-red button-fill'>-</b utton></div>" +
+                  "<div class='prodPic levation-3 fadeListaProd'>foto</div>" +
                   "<div class='prodEspecificacion'>" +
                     "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
                     "<div>"+doc.data().precio+"</div>" +
-                    "<div>0</div>" +
-                    "<div>0</div>" +
+                    "<div id='"+doc.data().id+"'></div>" +
+                    "<div></div>" +
                   "</div>" +
-                  "<div class='btn_incremento'><button id='btn_incr1' class='col button button-fill'>+</button></div>" +
-                "</div>" +
-                "<hr>"
+                  "<div class='btn_incremento'><button onclick='fnCantidad(this.id)' id='i_"+doc.data().id+"' class='col button button-fill'>+</button></div>" +
+               "</div>"
               );
             });
           })
-          .catch(function(error){console.log("Error en refProducto")});
+          .catch(function(error){console.log("Error en refProducto:"+ error)});
+
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
+var idSel;
 function fnCrearCategoria() {
   db = firebase.firestore();
   refCategoria = db.collection(email_login).doc("CATEGORIAS");
@@ -236,7 +241,8 @@ function fnCrearCategoria() {
         cat: firebase.firestore.FieldValue.arrayUnion(nuevaCategoria)
       });
       console.log("Nuevo ingreso creado")
-      mainView.router.navigate("/menu/");
+      alert("Nueva categoria creada");
+      mainView.router.navigate("/new/");
     } else {
       refCategoria.set({
         cat: [nuevaCategoria],
@@ -255,31 +261,62 @@ function fnCrearCategoria() {
 
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
+var dcr=0;
+var icr=0;
+function fnCantidad(idIngreso){
+  var idSplit = idIngreso.split("_");
+  p0 = idSplit[0];
+  p1 = idSplit[1];
+  console.log(p0, p1);
+  idSel = p1
+  
+  
+  //comparar ID
+  if (p0 == "d") {
+    dcr--;
+    $$('#'+p1).html(dcr);
+  } else {
+    icr++;
+    $$('#'+p1).html(icr);
+  }
+  console.log(dcr, icr)
+    
+}
+
 function fnNuevoProducto() {
 
   db = firebase.firestore();
   refProducto = db.collection(email_login).doc("PRODUCTOS");
   refColProd = db.collection(email_login);  
-
+  refIncremento = db.collection(email_login);
+  
   idProd = $$('#inpProdNuevo_Nombre').val();
   precio = $$('#inpProdNuevo_Precio').val();
   categoria = document.getElementById("selectCat").value;
-  
+  idG = (fnGeneradorID(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'));
+
   var dataProducto = {
     nombre: idProd,
     categoria: categoria,
     precio: precio,
+    id: idG,
   }
-
+  
   refColProd.doc(idProd).set(dataProducto)
   .then(function(){
-    console.log("Data ingresada con exito!");
+
+    console.log("Producto creado!");
   })
   .catch(function(error){
     console.log("error setteo dataProducto");
   })
-  console.log("Producto añadido");
-} //Seccion encargada de escribir las colecciones y documentos en la DB  --Listo--
+} //Seccion encargada de escribir las colecciones y documentos en la DB --Listo--
+
+function fnGeneradorID(length, chars) {
+  var result = '';
+  for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+  return result;
+} //Generador de ID alfanumerico
 
 function fnValorSeleccion(){
   var cSel = document.getElementById("selectCat").value;
@@ -355,6 +392,7 @@ function fnValidacionAlfanumerica(palabra) {
   return out;
 } //Funcion para eliminar espacios, y limitar a numeros y letras
 
+/*
 function fnFoto() {
   navigator.camera.getPicture(onSuccess,onError,
   {
@@ -371,6 +409,4 @@ function onSuccess(imageData) {
 } //onSuccess camara
 function onError() {
   console.log("error camara");
-} //onError camara
-
-
+} //onError camara*/
