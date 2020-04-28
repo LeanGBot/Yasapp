@@ -176,6 +176,18 @@ function fnLoginGoogle() {
  */
 } //login con google (probar cambio de versiones)
 
+function fnLogout() {
+  firebase.auth().signOut()
+  .then(function() {
+    console.log("Deslogueado");
+  })
+  .catch(function(error) {
+    console.log("error: " + error);
+  });
+// borro el local storage
+//storage.clear();
+} //Just... logout
+
 function fnCargaUsuario() {
   db = firebase.firestore();
   refProducto = db.collection(email_login).doc("PRODUCTOS");
@@ -215,20 +227,20 @@ function fnCargaUsuario() {
                   "<div class='prodPic levation-3 fadeListaProd'>foto</div>" +
                   "<div class='prodEspecificacion'>" +
                     "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
-                    "<div>"+doc.data().precio+"</div>" +
-                    "<div id='"+doc.data().id+"'></div>" +
-                    "<div></div>" +
+                    "<div id='p_"+doc.data().id+"'>"+doc.data().precio+"</div>" +
+                    
+                    "<div id='"+doc.data().id+"'>0</div>" +
+                    "<div id='t_"+doc.data().id+"'>0</div>" +
                   "</div>" +
                   "<div class='btn_incremento'><button onclick='fnCantidad(this.id)' id='i_"+doc.data().id+"' class='col button button-fill'>+</button></div>" +
                "</div>"
               );
             });
           })
-          .catch(function(error){console.log("Error en refProducto:"+ error)});
+        .catch(function(error){console.log("Error en refProducto:"+ error)});
 
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
-var idSel;
 function fnCrearCategoria() {
   db = firebase.firestore();
   refCategoria = db.collection(email_login).doc("CATEGORIAS");
@@ -261,26 +273,32 @@ function fnCrearCategoria() {
 
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
-var dcr=0;
-var icr=0;
+var idAux, contID = 0;
 function fnCantidad(idIngreso){
   var idSplit = idIngreso.split("_");
   p0 = idSplit[0];
   p1 = idSplit[1];
-  console.log(p0, p1);
-  idSel = p1
+  idArreglo = "#"+p1;
+  precioID = "#p_" + p1;
+  totalID = "#t_" + p1;
+
+  contID = $$(idArreglo).html();
   
-  
-  //comparar ID
-  if (p0 == "d") {
-    dcr--;
-    $$('#'+p1).html(dcr);
-  } else {
-    icr++;
-    $$('#'+p1).html(icr);
+  if (p0 == "i") {
+    contID++;
+    $$(idArreglo).html(contID);
+  }else{
+    if (contID <= 0) {
+      $$(idArreglo).html("0");
+    } else {
+      contID--;
+      $$(idArreglo).html(contID);
+    }
   }
-  console.log(dcr, icr)
-    
+  factor1 = $$(idArreglo).html();
+  factor2 = $$(precioID).html();
+  totalP = factor1*factor2;
+  $$(totalID).html(totalP);
 }
 
 function fnNuevoProducto() {
