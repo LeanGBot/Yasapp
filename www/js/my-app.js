@@ -17,8 +17,8 @@ var app = new Framework7({
       url: 'menu.html',
     },
     {
-      path: '/category/',
-      url: 'category.html',
+      path: '/resume/',
+      url: 'resume.html',
     },
     {
       path: '/new/',
@@ -45,7 +45,7 @@ var mainView = app.views.create('.view-main');
 var email_login;
 var db, refUsuario, refCategoria, refProducto;
 var categoria, idProd, catNueva, precio, cSel;
-
+var idExistentes = [];
 
 $$(document).on('deviceready', function(e) {
   console.log("Inicializado: Dispositivo");
@@ -70,8 +70,10 @@ $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
 });
 
-$$(document).on('page:init', '.page[data-name="category"]', function (e) {
+$$(document).on('page:init', '.page[data-name="resume"]', function (e) {
   console.log("Inicializado: Categorias");
+
+  fnResume();
 });
 
 $$(document).on('page:init', '.page[data-name="newcateg"]', function (e) {
@@ -82,6 +84,7 @@ $$(document).on('page:init', '.page[data-name="newcateg"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
+  window.localStorage.clear();
   fnCargaUsuario();
 });
 
@@ -215,11 +218,9 @@ function fnCargaUsuario() {
         .get()
         .then(function(querySnapshot) {
           querySnapshot.forEach(function(doc) {
-            console.log(doc.data());
-            console.log(doc.data().length);
-          
+            idExistentes.push('#'+doc.data().id);
+            
             nCategoria = "#dyn_"+doc.data().categoria;
-       
             $$(nCategoria)
             .append(
                "<div class='seccionProducto'>" +  
@@ -228,7 +229,6 @@ function fnCargaUsuario() {
                   "<div class='prodEspecificacion'>" +
                     "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
                     "<div id='p_"+doc.data().id+"'>"+doc.data().precio+"</div>" +
-                    
                     "<div id='"+doc.data().id+"'>0</div>" +
                     "<div id='t_"+doc.data().id+"'>0</div>" +
                   "</div>" +
@@ -238,6 +238,8 @@ function fnCargaUsuario() {
             });
           })
         .catch(function(error){console.log("Error en refProducto:"+ error)});
+        console.log("idExistentes: "+idExistentes);
+
 
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
@@ -281,25 +283,36 @@ function fnCantidad(idIngreso){
   idArreglo = "#"+p1;
   precioID = "#p_" + p1;
   totalID = "#t_" + p1;
-
   contID = $$(idArreglo).html();
+  
+  factor1 = $$(precioID).html();
   
   if (p0 == "i") {
     contID++;
     $$(idArreglo).html(contID);
   }else{
     if (contID <= 0) {
-      $$(idArreglo).html("0");
+      $$(idArreglo).html(0);
     } else {
       contID--;
       $$(idArreglo).html(contID);
     }
   }
-  factor1 = $$(idArreglo).html();
-  factor2 = $$(precioID).html();
-  totalP = factor1*factor2;
+  
+  
+
+  factor2 = $$(idArreglo).html();
+  totalP = factor1 * factor2;
   $$(totalID).html(totalP);
-}
+  
+  var ventas = {tot:totalP};
+  var storage = window.localStorage;
+
+  var IDaGuardar = JSON.stringify(ventas);
+  storage.setItem(idArreglo,IDaGuardar);
+
+
+} // Cambio de unidades de productos
 
 function fnNuevoProducto() {
 
@@ -410,21 +423,28 @@ function fnValidacionAlfanumerica(palabra) {
   return out;
 } //Funcion para eliminar espacios, y limitar a numeros y letras
 
-/*
-function fnFoto() {
-  navigator.camera.getPicture(onSuccess,onError,
-  {
-    quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI,
-    sourceType: Camera.PictureSourceType.CAMERA
-  });
-} //Seccion de captura de imagenes (por hacer)
-function onSuccess(imageData) {
-  var image = document.getElementById('fotoProd');
-  image.src = imageURI;
-  console.log(imageURI);
-  console.log(image.src);
-} //onSuccess camara
-function onError() {
-  console.log("error camara");
-} //onError camara*/
+total = 0;
+function fnResume() {
+  console.log(idExistentes.length);
+  console.log(idExistentes);
+  for (i=0; i<idExistentes.length; i++) {
+    console.log(idExistentes[i]);
+    
+
+    var storage = window.localStorage;
+    var vta = storage.getItem(idExistentes[i]);
+    vta = JSON.parse(vta);
+    
+
+    subt = vta.tot;
+    if (vta.tot == 0) {
+      console.log("valor 0");
+    }else{
+      total = total + subt;
+      console.log(total);
+    }
+
+    
+
+  }
+} //Resumen final
