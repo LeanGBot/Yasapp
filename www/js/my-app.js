@@ -449,6 +449,4 @@ function fnCalcular() {
   $$('#rVuelto').html(vuelto);
 } //Calculo de vuelto
 
-
-
 //falta: logout(asignar boton), camara y loginRS
