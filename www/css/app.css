@@ -163,6 +163,8 @@
     background-repeat: no-repeat;
 }
 #btn_guardarDatos {
+    
+    top: 7vh;
     margin: auto;
     width: 50vw;
 }
@@ -257,4 +259,8 @@
 @keyframes btn_venta {
     0%   {left:99vw; top:6vh;}
     100% {left:68vw; top:6vh;}
+}
+#btn_subirFoto {
+    margin-top: 3vh;
+
 }

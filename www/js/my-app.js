@@ -62,6 +62,8 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   console.log("Inicializado: Index");
   
   window.localStorage.clear();
+  idExistentes=[];
+
   $$('#btn_registrarse').on('click', fnRegistro);
   $$('#btn_login').on('click', fnLoginEmailPass);
   $$('#signUpGoogle').on('click', fnLoginGoogle);
@@ -71,6 +73,9 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
   $$('.btn_usuario').on('click', fnUsuario);
+  window.localStorage.clear();
+  idExistentes=[];
+
 });
 
 $$(document).on('page:init', '.page[data-name="resume"]', function (e) {
@@ -113,7 +118,6 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnValorSeleccion);
-  //$$('#fotoProd').on('click', fnFoto);
 
   fnListaCategoria();
 });
@@ -174,7 +178,7 @@ function fnLoginEmailPass() {
 
 function fnUsuario() {
 mainView.router.navigate("/index/"); 
-}
+} //Devuelve a seleccion de usuario
 
 function fnLoginGoogle() {
   /*console.log("Ingreso en fnLoginGoogle")
@@ -330,6 +334,12 @@ function fnNuevoProducto() {
   categoria = document.getElementById("selectCat").value;
   idG = (fnGeneradorID(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'));
 
+ //Foto
+
+
+
+ //Foto
+
   var dataProducto = {
     nombre: idProd,
     categoria: categoria,
@@ -345,6 +355,7 @@ function fnNuevoProducto() {
   .catch(function(error){
     console.log("error setteo dataProducto");
   })
+  mainView.router.navigate("/menu/"); 
 } //Seccion encargada de escribir las colecciones y documentos en la DB --Listo--
 
 function fnGeneradorID(length, chars) {
@@ -460,4 +471,61 @@ function fnFinalizar(){
   mainView.router.navigate("/menu/"); 
 }
 
-//falta: camara
+function getImage() {  
+	navigator.camera.getPicture(onSuccess,onError,	{
+	    quality: 50,
+	    destinationType: Camera.DestinationType.FILE_URI,
+	    sourceType: Camera.PictureSourceType.CAMERA
+	});
+}
+
+function selImage() {     
+	navigator.camera.getPicture(onSuccess,onError,	{
+	    quality: 50,
+	    destinationType: Camera.DestinationType.FILE_URI,
+	    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+	});
+}
+
+function onError() {
+  console.log("error camara");
+}
+
+function onSuccess(imageData) {
+    var storageRef = firebase.storage().ref();
+    var getFileBlob = function(url, cb) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.responseType = "blob";
+        xhr.addEventListener('load', function() {
+            cb(xhr.response);
+        });
+        xhr.send();
+    };
+
+    var blobToFile = function(blob, name) {
+        blob.lastModifiedDate = new Date();
+        blob.name = name;
+        return blob;
+    };
+
+    var getFileObject = function(filePathOrUrl, cb) {
+        getFileBlob(filePathOrUrl, function(blob) {
+            cb(blobToFile(blob, idG+".jpg"));
+        });
+    };
+
+    getFileObject(imageData, function(fileObject) {
+        var uploadTask = storageRef.child(email_login+"/"+idG+".jpg").put(fileObject);
+
+        uploadTask.on('state_changed', function(snapshot) {
+            console.log(snapshot);
+        }, function(error) {
+            console.log(error);
+        }, function() {
+            var downloadURL = uploadTask.snapshot.downloadURL;
+            console.log(downloadURL);
+        });
+    });
+
+}
