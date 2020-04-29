@@ -61,6 +61,7 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   console.log("Inicializado: Index");
   
+  window.localStorage.clear();
   $$('#btn_registrarse').on('click', fnRegistro);
   $$('#btn_login').on('click', fnLoginEmailPass);
   $$('#signUpGoogle').on('click', fnLoginGoogle);
@@ -85,6 +86,16 @@ $$(document).on('page:init', '.page[data-name="newcateg"]', function (e) {
 $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
   window.localStorage.clear();
+  idExistentes=[];
+  
+  for (i=0; i<idExistentes.length; i++) {
+    var ventas = {tot:0};
+    var storage = window.localStorage;
+  
+    var IDaGuardar = JSON.stringify(ventas);
+    storage.setItem(idExistentes[i],IDaGuardar);
+  }
+
   fnCargaUsuario();
 });
 
@@ -278,13 +289,12 @@ function fnCantidad(idIngreso){
   var idSplit = idIngreso.split("_");
   p0 = idSplit[0];
   p1 = idSplit[1];
-  idArreglo = "#"+p1;
+  idArreglo = "#" + p1;
   precioID = "#p_" + p1;
   totalID = "#t_" + p1;
   contID = $$(idArreglo).html();
-  
   factor1 = $$(precioID).html();
-  
+
   if (p0 == "i") {
     contID++;
     $$(idArreglo).html(contID);
@@ -297,12 +307,11 @@ function fnCantidad(idIngreso){
     }
   }
   
-  
-
   factor2 = $$(idArreglo).html();
   totalP = factor1 * factor2;
   $$(totalID).html(totalP);
   
+
   var ventas = {tot:totalP};
   var storage = window.localStorage;
 
@@ -440,6 +449,7 @@ function fnResume() {
 
     $$("#rTotal").html(total);
   }
+
 } //Resumen final
 
 function fnCalcular() {

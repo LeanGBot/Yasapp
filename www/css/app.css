@@ -1,3 +1,24 @@
+.rCont {
+    background: whitesmoke ;
+    margin: auto;
+    display: flex;
+    width: 60%;
+    height: 6vh;
+    padding: 0 5vh 0;
+
+}
+.btn_calcular {
+    top: 10vh;
+    width: 60%;
+    height: 8vh;
+    margin: auto;
+}
+.btn_finalizar {
+    bottom: -42vh;
+    height: 9vh;
+    font-size: 5vw;
+}
+
 .button .ripple-wave {
     background-color: #7a47a3;
   }
