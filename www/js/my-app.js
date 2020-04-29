@@ -44,7 +44,7 @@ var mainView = app.views.create('.view-main');
 
 var email_login;
 var db, refUsuario, refCategoria, refProducto;
-var categoria, idProd, catNueva, precio, cSel;
+var categoria, idProd, catNueva, precio, cSel, total;
 var idExistentes = [];
 
 $$(document).on('deviceready', function(e) {
@@ -72,7 +72,7 @@ $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
 
 $$(document).on('page:init', '.page[data-name="resume"]', function (e) {
   console.log("Inicializado: Categorias");
-
+  $$("#btn_Calcular").on('click', fnCalcular);
   fnResume();
 });
 
@@ -187,8 +187,6 @@ function fnLogout() {
   .catch(function(error) {
     console.log("error: " + error);
   });
-// borro el local storage
-//storage.clear();
 } //Just... logout
 
 function fnCargaUsuario() {
@@ -423,28 +421,34 @@ function fnValidacionAlfanumerica(palabra) {
   return out;
 } //Funcion para eliminar espacios, y limitar a numeros y letras
 
-total = 0;
 function fnResume() {
+  total = 0;
   console.log(idExistentes.length);
   console.log(idExistentes);
-  for (i=0; i<idExistentes.length; i++) {
-    console.log(idExistentes[i]);
-    
+  
+  for (i=1; i<idExistentes.length; i++) {
+    console.log("id ex: "+idExistentes[i]);
 
     var storage = window.localStorage;
     var vta = storage.getItem(idExistentes[i]);
     vta = JSON.parse(vta);
-    
 
     subt = vta.tot;
-    if (vta.tot == 0) {
-      console.log("valor 0");
-    }else{
-      total = total + subt;
-      console.log(total);
-    }
+    console.log("1 "+subt);
+    total = total + subt;
+    console.log("2 "+total);
 
-    
-
+    $$("#rTotal").html(total);
   }
 } //Resumen final
+
+function fnCalcular() {
+  pago = $$('#rPago').val();
+  total = $$('#rTotal').html();
+  vuelto =total - pago;
+  $$('#rVuelto').html(vuelto);
+} //Calculo de vuelto
+
+
+
+//falta: logout(asignar boton), camara y loginRS
