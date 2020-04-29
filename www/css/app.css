@@ -168,7 +168,6 @@
     margin: auto;
     width: 50vw;
 }
-
 .seccionProducto {
     padding: 0 ;
     margin: 0.5vh;
@@ -181,7 +180,6 @@
     
     width: 14vw;
     height: 17vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,7 +225,6 @@
     0% {opacity: 0;}
     100% {opacity: 1;}
 }
-
 #btn_venta, #btn_nuevoProd {
     margin: 5vh 0 5vh 0;
     display: flex;

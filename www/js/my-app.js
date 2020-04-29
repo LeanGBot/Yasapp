@@ -44,7 +44,7 @@ var mainView = app.views.create('.view-main');
 
 var email_login;
 var db, refUsuario, refCategoria, refProducto;
-var categoria, idProd, catNueva, precio, cSel, total;
+var categoria, idProd, precio, cSel, total;
 var idExistentes = [];
 
 $$(document).on('deviceready', function(e) {
@@ -118,7 +118,7 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnValorSeleccion);
-
+  $$('#selectCat').html("");
   fnListaCategoria();
 });
 
@@ -261,40 +261,6 @@ function fnCargaUsuario() {
           })
         .catch(function(error){console.log("Error en refProducto:"+ error)});
         console.log("idExistentes: "+idExistentes);
-
-      
-      
-      //for (i=0; i<idExistentes.length; i++) {}
-
-
-
-
-
-      
-
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
 function fnCrearCategoria() {
@@ -569,4 +535,3 @@ function onSuccess(imageData) {
         });
     });
 }
-
