@@ -195,9 +195,8 @@
     justify-content: center;
 }
 .prodPic {
+    border-inline-start-width: 2% black solid;
     margin: 2vh 4vw 2vh 4vw;
-    
-    box-shadow: rgb(163, 163, 163);
     border-radius: 15%;
     width: 28vw;
     height: 28vw;

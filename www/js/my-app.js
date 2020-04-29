@@ -234,8 +234,8 @@ function fnCargaUsuario() {
             $$(nCategoria)
             .append(
                "<div class='seccionProducto'>" +  
-                "<div class='btn_decremento'><button onclick='fnCantidad(this.id)' id='d_"+doc.data().id+"' class='col button color-red button-fill'>-</b utton></div>" +
-                  "<div class='prodPic levation-3 fadeListaProd'>foto</div>" +
+                "<div class='btn_decremento'><button onclick='fnCantidad(this.id)' id='d_"+doc.data().id+"' class='col button color-red button-fill'>-</button></div>" +
+                  "<img class='prodPic elevation-3 fadeListaProd' id='img_"+doc.data().id+"' src='' alt='"+doc.data().id+"'.jpg'>" +
                   "<div class='prodEspecificacion'>" +
                     "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
                     "<div id='p_"+doc.data().id+"'>"+doc.data().precio+"</div>" +
@@ -245,11 +245,55 @@ function fnCargaUsuario() {
                   "<div class='btn_incremento'><button onclick='fnCantidad(this.id)' id='i_"+doc.data().id+"' class='col button button-fill'>+</button></div>" +
                "</div>"
               );
+
+              var storageRef = firebase.storage().ref().child(email_login+"/"+doc.data().id+".jpg");
+              storageRef
+              .getDownloadURL()
+              .then(function(url) {
+              
+                var urlImg = url;
+                $$("#img_"+doc.data().id).attr("src",urlImg);
+                console.log(urlImg);
+              })
+
+
             });
           })
         .catch(function(error){console.log("Error en refProducto:"+ error)});
         console.log("idExistentes: "+idExistentes);
 
+      
+      
+      //for (i=0; i<idExistentes.length; i++) {}
+
+
+
+
+
+      
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
@@ -334,12 +378,6 @@ function fnNuevoProducto() {
   categoria = document.getElementById("selectCat").value;
   idG = (fnGeneradorID(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'));
 
- //Foto
-
-
-
- //Foto
-
   var dataProducto = {
     nombre: idProd,
     categoria: categoria,
@@ -355,6 +393,7 @@ function fnNuevoProducto() {
   .catch(function(error){
     console.log("error setteo dataProducto");
   })
+  getImage();
   mainView.router.navigate("/menu/"); 
 } //Seccion encargada de escribir las colecciones y documentos en la DB --Listo--
 
@@ -525,7 +564,9 @@ function onSuccess(imageData) {
         }, function() {
             var downloadURL = uploadTask.snapshot.downloadURL;
             console.log(downloadURL);
+            alert(downloadURL);
+            return;
         });
     });
-
 }
+
