@@ -65,15 +65,18 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
   $$('#btn_registrarse').on('click', fnRegistro);
   $$('#btn_login').on('click', fnLoginEmailPass);
   $$('#signUpGoogle').on('click', fnLoginGoogle);
+  
 });
 
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
+  $$('.btn_usuario').on('click', fnUsuario);
 });
 
 $$(document).on('page:init', '.page[data-name="resume"]', function (e) {
   console.log("Inicializado: Categorias");
   $$("#btn_Calcular").on('click', fnCalcular);
+  $$("#btn_Finalizar").on('click', fnFinalizar);
   fnResume();
 });
 
@@ -169,6 +172,10 @@ function fnLoginEmailPass() {
       });
 } //login con email y pass
 
+function fnUsuario() {
+mainView.router.navigate("/index/"); 
+}
+
 function fnLoginGoogle() {
   /*console.log("Ingreso en fnLoginGoogle")
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -189,16 +196,6 @@ function fnLoginGoogle() {
   });
  */
 } //login con google (probar cambio de versiones)
-
-function fnLogout() {
-  firebase.auth().signOut()
-  .then(function() {
-    console.log("Deslogueado");
-  })
-  .catch(function(error) {
-    console.log("error: " + error);
-  });
-} //Just... logout
 
 function fnCargaUsuario() {
   db = firebase.firestore();
@@ -459,4 +456,8 @@ function fnCalcular() {
   $$('#rVuelto').html(vuelto);
 } //Calculo de vuelto
 
-//falta: logout(asignar boton), camara y loginRS
+function fnFinalizar(){
+  mainView.router.navigate("/menu/"); 
+}
+
+//falta: camara

@@ -1,3 +1,10 @@
+.btn_usuario {
+    top: 0;
+    right: 0;
+    width: max-content;
+    height: 9vw;
+    position: absolute;
+}
 .rCont {
     background: whitesmoke ;
     margin: auto;
@@ -5,7 +12,7 @@
     width: 60%;
     height: 6vh;
     padding: 0 5vh 0;
-
+    border-radius: 0 0 0 2%;
 }
 .btn_calcular {
     top: 10vh;
@@ -76,19 +83,6 @@
     top: 50vh;
     position: relative;
 }
-#btn_venta, #btn_nuevoProd {
-    margin: 5vh 0 5vh 0;
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    top: 10vh;
-    position: relative;
-    padding: 0 7vw 0;
-    left: 30vw;
-    width: fit-content;
-    height: 8vh;
-}
-
 .usuarios_menu {
     border: chartreuse 2px solid;
     position: relative;
@@ -154,7 +148,7 @@
     width: 70vw;
     height: 70vw;
     margin: auto;
-    margin-top: 8vh;
+    margin-top: 15vh;
     background-image: url(./img/LogoAPP.png)  !important;
     background-size: contain !important;
     background-repeat: no-repeat;
@@ -232,22 +226,35 @@
     0% {opacity: 0;}
     100% {opacity: 1;}
 }
+
+#btn_venta, #btn_nuevoProd {
+    margin: 5vh 0 5vh 0;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    top: 6vh;
+    position: relative;
+    padding: 0 7vw 0;
+    left: 27.5vw;
+    width: fit-content;
+    height: 8vh;
+}
 #btn_nuevoProd {
     animation-name: btn_nuevoProd;
     animation-duration: 0.6s;
     animation-delay: 0s;
 }
 @keyframes btn_nuevoProd {
-    0%   {left:99vw; top:10vh;}
-    100% {left:30vw; top:10vh;}
+    0%   {left:99vw; top:6vh;}
+    100% {left:27.5vw; top:6vh;}
 }
 #btn_venta {
-    left: 70vw;
+    left: 68vw;
     animation-name: btn_venta;
     animation-duration: 0.7s;
     animation-delay: 0s;
 }
 @keyframes btn_venta {
-    0%   {left:99vw; top:10vh;}
-    100% {left:70vw; top:10vh;}
+    0%   {left:99vw; top:6vh;}
+    100% {left:68vw; top:6vh;}
 }
