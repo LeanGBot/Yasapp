@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>helloworld</name>
+<widget id="com.leangbot.shoptool" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Shoptool</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Una aplicacion diseñada para ayudar en la venta unipersonal.
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
+    <author email="leandro.gbot@gmail.com" href="https://www.facebook.com/stlservtec/">
         Apache Cordova Team
     </author>
     <content src="index.html" />

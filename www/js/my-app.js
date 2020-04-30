@@ -126,46 +126,43 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 function fnRegistro() {
   var registro_mail = $$('#register_mail').val();
   var registro_pass = $$('#register_pass').val();
-
   var mostrarError = 0;
 
-  firebase.auth().createUserWithEmailAndPassword(registro_mail, registro_pass)
+  if ($$("#register_pass")==$$("#val_pass")) {
+    firebase.auth().createUserWithEmailAndPassword(registro_mail, registro_pass)
+     .catch(function(error) {       
+      var errorCode = error.code;
+      var errorMessage = error.message; 
+      
+      console.log(errorCode);
+      console.log(errorMessage);
+    })
   
-  .catch(function(error) {       
-    var errorCode = error.code;
-    var errorMessage = error.message; 
-    
-    console.log(errorCode);
-    console.log(errorMessage);
-  })
+    .then(function(){
+        if(mostrarError == 0){
+          console.log('Registro exitoso');
+          mainView.router.navigate("/index/");
+        }
+    });
+  } else {
+    alert("Las contraseñas no coinciden");
+  }
 
-  .then(function(){
-      if(mostrarError == 0){
-        console.log('Registro exitoso');
-        mainView.router.navigate("/index/");
-      }
-  });
 } //registro
 
 function fnLoginEmailPass() {
-
   email_login = $$('#login_email').val();
 
   var pass_login = $$('#login_pass').val();
-
-  console.log(email_login);
-  console.log(pass_login);
-
   var mostrarError = 0;
   firebase.auth().signInWithEmailAndPassword(email_login, pass_login)
       .catch(function(error){
         mostrarError = 1;
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage);
+        alert(errorMessage);
         console.log(errorCode);
       })
-        
       .then(function(){
         if (mostrarError == 1) {
           console.log("login incorrecto");
@@ -478,9 +475,11 @@ function fnFinalizar(){
 
 function getImage() {  
 	navigator.camera.getPicture(onSuccess,onError,	{
-	    quality: 50,
+	    quality: 80,
 	    destinationType: Camera.DestinationType.FILE_URI,
-	    sourceType: Camera.PictureSourceType.CAMERA
+      sourceType: Camera.PictureSourceType.CAMERA,
+      targetWidth: 150,
+      targetHeight: 150,
 	});
 }
 

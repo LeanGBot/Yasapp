@@ -63,6 +63,7 @@
 }
 #index-reg {
     font-weight: bolder;
+    margin: auto;
 }
 #btn_registrarse {
     height: 6%;
@@ -98,21 +99,25 @@
     width: 80%;
 }
 .tit_login {
-    margin-top: 20%;
+    margin-top: 10vh;
 }
 .btn_login {
-    font-size: 3vh;
-    height: 8vh;
+    font-size: 16px;
+    height: 12%;
     width: 50vw;
     margin: auto;
     top: 5vh;
+    position: relative;
 }
 .btn_regis {
-    margin-top: 13vh;
+    position: relative;
+    margin: auto;
+    margin-top: 30vh;
     background: rgba(255, 254, 254, 0.30) ;
     border-radius: 0 8vh 0 8vh;
-    box-shadow: rgb(163, 163, 163);
-
+    padding: 3vh;
+    width: 80vw;
+ 
 }
 .list_regis {
     position: absolute;
@@ -163,7 +168,6 @@
     background-repeat: no-repeat;
 }
 #btn_guardarDatos {
-    
     top: 7vh;
     margin: auto;
     width: 50vw;
@@ -177,7 +181,6 @@
     background-color: rgba(255, 254, 254, 0.30);
 }
 .btn_decremento, .btn_incremento {
-    
     width: 14vw;
     height: 17vh;
     display: flex;
