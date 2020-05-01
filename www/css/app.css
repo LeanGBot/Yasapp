@@ -1,3 +1,14 @@
+.btnCant {
+    height: 10vh;
+}
+#usuarioLog {
+    font-weight: bolder;
+    font-size: 14px;
+    color: teal;
+    position: absolute;
+    top:-1.2vh;
+    left: 6vw;
+}
 .btn_usuario {
     top: 0;
     right: 0;
@@ -14,21 +25,95 @@
     padding: 0 5vh 0;
     border-radius: 0 0 0 2%;
 }
+.r1sc1 {
+    position: relative;
+    top: 4vh;
+    color: white;
+    background-color: teal;
+    font-size: 24px;
+    margin: auto;
+    text-align: center;
+    vertical-align: auto;
+    height: 6vh;
+    width: 100vw;
+    font-weight: bolder;
+}
+.r1sc2 {
+    position: relative;
+    top: 4vh;
+    background-color: rgb(93, 207, 207, 0.5);
+    font-size: 28px;
+    margin: auto;
+    text-align: center;
+    height: 7vh;
+    width: 100vw;
+    font-weight: bolder;
+}
+.r1sc3 {
+    position: relative;
+    color: rgb(255, 255, 255);
+    background-color: rgb(129, 190, 121);
+    font-size: 24px;
+    margin: auto;
+    text-align: center;
+    vertical-align: auto;
+    height: 6vh;
+    width: 100vw;
+    font-weight: bolder;
+    top: 8vh;
+}   
+.r1sc4 {
+    position: relative;
+    top:10vh;
+    margin: auto;
+    text-align: center;
+    height: 7vh;
+    width: 100vw;
+    font-weight: bolder;
+}
+.r2sc1 {
+    position: relative;
+    top: 26vh;
+    color: white;
+    background-color: teal;
+    font-size: 20px;
+    margin: auto;
+    text-align: center;
+    vertical-align: auto;
+    height: 6vh;
+    font-weight: bolder;
+}
+.r2sc2 {
+    position: relative;
+    top: 26vh;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+    height: 4vh;
+    width: 100vw;
+    font-weight: bolder;
+}
+.resum {
+    font-weight: bolder;
+    font-size: 20px;
+    color: thistle;
+    background-color: rgb(245, 66, 35);
+    border-radius: 2vw 0 0 2vw;
+}
 .btn_calcular {
     top: 10vh;
-    width: 60%;
-    height: 8vh;
+    height: 6vh;
     margin: auto;
+    width: 70vw;
 }
 .btn_finalizar {
-    bottom: -42vh;
+    bottom: -38vh;
     height: 9vh;
     font-size: 5vw;
 }
-
 .button .ripple-wave {
     background-color: #7a47a3;
-  }
+}
 #fotoProd {
     width: 20vw;
     height: 20vw;
@@ -66,16 +151,18 @@
     margin: auto;
 }
 #btn_registrarse {
-    height: 6%;
+    height: 10vh;
     width: 50vw;
     margin: auto;
-    top: 3vh;
+    top: 15vh;
+    font-size: 18px;
 }
 #page-añadirCat {
     margin: auto;
     width: 60vw;
     top: 20%;
-    font-size: 14px;
+    font-size: 2.5vh;
+    height: auto;
 }
 #div_btn_init {
     display: flex;
@@ -101,13 +188,14 @@
 .tit_login {
     margin-top: 10vh;
 }
-.btn_login {
+#btn_login {
+    position: relative;
     font-size: 16px;
-    height: 12%;
+    top: 10vh;
+
+    height: 8vh;
     width: 50vw;
     margin: auto;
-    top: 5vh;
-    position: relative;
 }
 .btn_regis {
     position: relative;
@@ -117,7 +205,6 @@
     border-radius: 0 8vh 0 8vh;
     padding: 3vh;
     width: 80vw;
- 
 }
 .list_regis {
     position: absolute;
@@ -179,17 +266,34 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 254, 254, 0.30);
+    animation-name: seccionProducto;
+    animation-duration: 0.6s;
+    animation-delay: 0s;
+}
+.prodPic {
+    animation-name: prodPic;
+    animation-duration: 1.6s;
+    animation-delay: 0.5s;
+}
+
+@keyframes seccionProducto {
+    0% {
+      opacity: 0%;
+      top: -3vh;}
+    100% {
+        opacity: 100%;
+        top: 0vh;}
 }
 .btn_decremento, .btn_incremento {
     width: 14vw;
-    height: 17vh;
+    height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .prodEspecificacion {
     border: transparent 1vh solid ;
-    width: 40vw;
+    width: 30vw;
     height: 25vw;
     font-weight: bolder;
     align-items: center;
@@ -218,11 +322,8 @@
 /*Animaciones*/
 .fadeListaProd {
     animation-name: fadeListaProd;
-    animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-@-webkit-keyframes fadeListaProd {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
+    animation-duration: 1.3s;
+    animation-delay: 0.9s;
 }
 @keyframes fadeListaProd {
     0% {opacity: 0;}
@@ -233,7 +334,7 @@
     display: flex;
     justify-content: center;
     font-size: 20px;
-    top: 6vh;
+    top: 4vh;
     position: relative;
     padding: 0 7vw 0;
     left: 27.5vw;
@@ -246,8 +347,8 @@
     animation-delay: 0s;
 }
 @keyframes btn_nuevoProd {
-    0%   {left:99vw; top:6vh;}
-    100% {left:27.5vw; top:6vh;}
+    0%   {left:99vw; top:4vh;}
+    100% {left:27.5vw; top:4vh;}
 }
 #btn_venta {
     left: 68vw;
@@ -256,10 +357,13 @@
     animation-delay: 0s;
 }
 @keyframes btn_venta {
-    0%   {left:99vw; top:6vh;}
-    100% {left:68vw; top:6vh;}
+    0%   {left:99vw; top:4vh;}
+    100% {left:68vw; top:4vh;}
 }
 #btn_subirFoto {
     margin-top: 3vh;
-
+}
+.cbtn {
+    height: 10vh;
+    width: 17vw;
 }

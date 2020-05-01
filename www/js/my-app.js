@@ -73,13 +73,14 @@ $$(document).on('page:init', '.page[data-name="index"]', function (e) {
 $$(document).on('page:init', '.page[data-name="menu"]', function (e) {
   console.log("Inicializado: Menu");
   $$('.btn_usuario').on('click', fnUsuario);
+  $$("#usuarioLog").html(email_login);
   window.localStorage.clear();
   idExistentes=[];
 
 });
 
 $$(document).on('page:init', '.page[data-name="resume"]', function (e) {
-  console.log("Inicializado: Categorias");
+  console.log("Inicializado: Resumen");
   $$("#btn_Calcular").on('click', fnCalcular);
   $$("#btn_Finalizar").on('click', fnFinalizar);
   fnResume();
@@ -95,27 +96,16 @@ $$(document).on('page:init', '.page[data-name="list"]', function (e) {
   console.log("Inicializado: Lista");
   window.localStorage.clear();
   idExistentes=[];
-  
-  for (i=0; i<idExistentes.length; i++) {
-    var ventas = {tot:0};
-    var storage = window.localStorage;
-  
-    var IDaGuardar = JSON.stringify(ventas);
-    storage.setItem(idExistentes[i],IDaGuardar);
-  }
-
   fnCargaUsuario();
 });
 
 $$(document).on('page:init', '.page[data-name="register"]', function (e) {
   console.log("Inicializado: Registro");
-  
   $$('#btn_registrarse').on('click', fnRegistro);
 });
 
 $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   console.log("Inicializado: Nuevo Producto");
-
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnValorSeleccion);
   $$('#selectCat').html("");
@@ -127,8 +117,11 @@ function fnRegistro() {
   var registro_mail = $$('#register_mail').val();
   var registro_pass = $$('#register_pass').val();
   var mostrarError = 0;
+  var tpass1 = $$("#register_pass").val();
+  var tpass2 = $$("#val_pass").val();
+  console.log(tpass1, tpass2);
 
-  if ($$("#register_pass")==$$("#val_pass")) {
+  if (tpass1 == tpass2) {
     firebase.auth().createUserWithEmailAndPassword(registro_mail, registro_pass)
      .catch(function(error) {       
       var errorCode = error.code;
@@ -144,6 +137,7 @@ function fnRegistro() {
           mainView.router.navigate("/index/");
         }
     });
+
   } else {
     alert("Las contraseñas no coinciden");
   }
@@ -231,15 +225,15 @@ function fnCargaUsuario() {
             $$(nCategoria)
             .append(
                "<div class='seccionProducto'>" +  
-                "<div class='btn_decremento'><button onclick='fnCantidad(this.id)' id='d_"+doc.data().id+"' class='col button color-red button-fill'>-</button></div>" +
-                  "<img class='prodPic elevation-3 fadeListaProd' id='img_"+doc.data().id+"' src='' alt='"+doc.data().id+"'.jpg'>" +
+                "<div class='btn_decremento'><button onclick='fnCantidad(this.id)' id='d_"+doc.data().id+"' class='col cbtn button color-red button-fill'>-</button></div>" +
+                  "<img class='prodPic elevation-3 fadeListaProd' id='img_"+doc.data().id+"' src=''>" +
                   "<div class='prodEspecificacion'>" +
                     "<div style='font-size:18px'>"+doc.data().nombre+"</div>" +
                     "<div id='p_"+doc.data().id+"'>"+doc.data().precio+"</div>" +
                     "<div id='"+doc.data().id+"'>0</div>" +
                     "<div id='t_"+doc.data().id+"'>0</div>" +
                   "</div>" +
-                  "<div class='btn_incremento'><button onclick='fnCantidad(this.id)' id='i_"+doc.data().id+"' class='col button button-fill'>+</button></div>" +
+                  "<div class='btn_incremento'><button onclick='fnCantidad(this.id)' id='i_"+doc.data().id+"' class='col cbtn button button-fill'>+</button></div>" +
                "</div>"
               );
 
@@ -250,7 +244,7 @@ function fnCargaUsuario() {
               
                 var urlImg = url;
                 $$("#img_"+doc.data().id).attr("src",urlImg);
-                console.log(urlImg);
+                //console.log(urlImg);
               })
 
 
@@ -441,35 +435,38 @@ function fnValidacionAlfanumerica(palabra) {
 } //Funcion para eliminar espacios, y limitar a numeros y letras
 
 function fnResume() {
-  total = 0;
-  console.log(idExistentes.length);
-  console.log(idExistentes);
-  
-  for (i=1; i<idExistentes.length; i++) {
-    console.log("id ex: "+idExistentes[i]);
+total = 0;
+var storage = window.localStorage;
 
-    var storage = window.localStorage;
-    var vta = storage.getItem(idExistentes[i]);
-    vta = JSON.parse(vta);
+var values = [],
+keys = Object.keys(localStorage),
+i = keys.length;
 
-    subt = vta.tot;
-    console.log("1 "+subt);
-    total = total + subt;
-    console.log("2 "+total);
+while ( i-- ) {
+  values.push( localStorage.getItem(keys[i]) );
+  console.log(keys[i]);
 
-    $$("#rTotal").html(total);
-  }
+  var vta = storage.getItem(keys[i]);
+  vta = JSON.parse(vta);
+
+  subt = vta.tot;
+  total = total + subt;
+  console.log(total);
+
+  $$("#rTotal").html("$" + total);
+
+}
 
 } //Resumen final
 
 function fnCalcular() {
   pago = $$('#rPago').val();
-  total = $$('#rTotal').html();
   vuelto =total - pago;
-  $$('#rVuelto').html(vuelto);
+  $$('#rVuelto').html("$ "+ vuelto);
 } //Calculo de vuelto
 
 function fnFinalizar(){
+  alert("La tarea ha fallado con exito!");
   mainView.router.navigate("/menu/"); 
 }
 
@@ -529,7 +526,7 @@ function onSuccess(imageData) {
         }, function() {
             var downloadURL = uploadTask.snapshot.downloadURL;
             console.log(downloadURL);
-            alert(downloadURL);
+            
             return;
         });
     });
