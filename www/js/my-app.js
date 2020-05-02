@@ -116,12 +116,13 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
 function fnRegistro() {
   var registro_mail = $$('#register_mail').val();
   var registro_pass = $$('#register_pass').val();
+
   var mostrarError = 0;
   var tpass1 = $$("#register_pass").val();
   var tpass2 = $$("#val_pass").val();
-  console.log(tpass1, tpass2);
 
   if (tpass1 == tpass2) {
+    console.log("contraseñas coincidentes")
     firebase.auth().createUserWithEmailAndPassword(registro_mail, registro_pass)
      .catch(function(error) {       
       var errorCode = error.code;
@@ -139,7 +140,7 @@ function fnRegistro() {
     });
 
   } else {
-    alert("Las contraseñas no coinciden");
+   alert("Las contraseñas no coinciden");
   }
 
 } //registro
