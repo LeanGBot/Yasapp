@@ -207,7 +207,6 @@ function fnCargaUsuario() {
   .then(function(doc){
     if (doc.exists) {
       var categoriasCreadas = doc.data().cat;
-      console.log(categoriasCreadas);
       
       for (c=0; c<categoriasCreadas.length; c++) {
         var listado_cat = "<div class='seccionCategoria' id='dyn_"+categoriasCreadas[c]+"'><strong>"+categoriasCreadas[c]+"</strong></div>";
@@ -245,17 +244,18 @@ function fnCargaUsuario() {
               storageRef
               .getDownloadURL()
               .then(function(url) {
-              
                 var urlImg = url;
                 $$("#img_"+doc.data().id).attr("src",urlImg);
-                //console.log(urlImg);
               })
-
-
+              .catch(function(error){
+                $$("#img_"+doc.data().id).attr("src","./css/img/noimage.jpg")
+              });
             });
           })
-        .catch(function(error){console.log("Error en refProducto:"+ error)});
-        console.log("idExistentes: "+idExistentes);
+
+        .catch(function(error){
+          console.log("Error en refProducto:"+ error);
+        });
 } //Seccion que se ejecuta en la carga de productos segun su categoria
 
 function fnCrearCategoria() {
@@ -366,7 +366,7 @@ function fnGeneradorID(length, chars) {
 
 function fnValorSeleccion() {
   var cSel = document.getElementById("selectCat").value;
-  console.log(cSel);
+
   
 } //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
 
@@ -400,7 +400,6 @@ function fnListaProductos() {
   .then(function(doc){
     if (doc.exists) {
       var categoriasCreadas = doc.data().cat;
-      console.log(categoriasCreadas);
     }
     for (c=0; c<categoriasCreadas.length; c++) {
       var listado_cat = "<div id='"+ categoriasCreadas[i] +"'></div>";
@@ -448,14 +447,12 @@ i = keys.length;
 
 while ( i-- ) {
   values.push( localStorage.getItem(keys[i]) );
-  console.log(keys[i]);
 
   var vta = storage.getItem(keys[i]);
   vta = JSON.parse(vta);
 
   subt = vta.tot;
   total = total + subt;
-  console.log(total);
 
   $$("#rTotal").html("$" + total);
 
@@ -524,13 +521,10 @@ function onSuccess(imageData) {
         var uploadTask = storageRef.child(email_login+"/"+idG+".jpg").put(fileObject);
 
         uploadTask.on('state_changed', function(snapshot) {
-            console.log(snapshot);
         }, function(error) {
             console.log(error);
         }, function() {
             var downloadURL = uploadTask.snapshot.downloadURL;
-            console.log(downloadURL);
-            
             return;
         });
     });
