@@ -253,11 +253,18 @@
     background-image: url(./img/infobox.png)  !important;
     background-size: contain !important;
     background-repeat: no-repeat;
+    
 }
+.pag-lista {
+    height: 92vh;
+    position: absolute;
+}
+
 #btn_guardarDatos {
-    top: 7vh;
+    top: 4vh;
     margin: auto;
     width: 50vw;
+    height: 8vh;
 }
 .seccionProducto {
     padding: 0 ;

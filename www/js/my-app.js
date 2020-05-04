@@ -109,6 +109,9 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   $$('#btn_guardarDatos').on('click', fnNuevoProducto);
   $$('#selectCat').on('change', fnValorSeleccion);
   $$('#selectCat').html("");
+  
+  $$('inpProdNuevo_Precio').on('change', function(){if ($$('inpProdNuevo_Precio') > 0){$$('#btn_guardarDatos').prop('disabled', false)}});
+  
   fnListaCategoria();
 });
 
@@ -288,7 +291,7 @@ function fnCrearCategoria() {
 } //Seccion que se ejecuta al crear una categoria nueva en "/new/"
 
 var idAux, contID = 0;
-function fnCantidad(idIngreso){
+function fnCantidad(idIngreso) {
   var idSplit = idIngreso.split("_");
   p0 = idSplit[0];
   p1 = idSplit[1];
@@ -361,7 +364,7 @@ function fnGeneradorID(length, chars) {
   return result;
 } //Generador de ID alfanumerico
 
-function fnValorSeleccion(){
+function fnValorSeleccion() {
   var cSel = document.getElementById("selectCat").value;
   console.log(cSel);
   
