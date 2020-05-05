@@ -110,8 +110,6 @@ $$(document).on('page:init', '.page[data-name="new"]', function (e) {
   $$('#selectCat').on('change', fnValorSeleccion);
   $$('#selectCat').html("");
   
-  $$('inpProdNuevo_Precio').on('change', function(){if ($$('inpProdNuevo_Precio') > 0){$$('#btn_guardarDatos').prop('disabled', false)}});
-  
   fnListaCategoria();
 });
 
@@ -465,7 +463,7 @@ function fnCalcular() {
 } //Calculo de vuelto
 
 function fnFinalizar() {
-  alert("La tarea ha fallado con exito!");
+
   mainView.router.navigate("/menu/"); 
 }
 
