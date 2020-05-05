@@ -366,8 +366,6 @@ function fnGeneradorID(length, chars) {
 
 function fnValorSeleccion() {
   var cSel = document.getElementById("selectCat").value;
-
-  
 } //Seccion que debe almacenar lo seleccionado en "selectCat" en /new/
 
 function fnListaCategoria() {
@@ -466,7 +464,7 @@ function fnCalcular() {
   $$('#rVuelto').html("$ "+ vuelto);
 } //Calculo de vuelto
 
-function fnFinalizar(){
+function fnFinalizar() {
   alert("La tarea ha fallado con exito!");
   mainView.router.navigate("/menu/"); 
 }
@@ -476,14 +474,14 @@ function getImage() {
 	    quality: 80,
 	    destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
-      targetWidth: 150,
-      targetHeight: 150,
+      targetWidth: 100,
+      targetHeight: 100,
 	});
 }
 
 function selImage() {     
 	navigator.camera.getPicture(onSuccess,onError,	{
-	    quality: 50,
+	    quality: 80,
 	    destinationType: Camera.DestinationType.FILE_URI,
 	    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
 	});

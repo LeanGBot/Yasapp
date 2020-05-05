@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.leangbot.shoptool" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Shoptool</name>
+    <name>Yasapp</name>
     <description>
         Una aplicacion diseñada para ayudar en la venta unipersonal.
     </description>
@@ -28,22 +28,22 @@
         <preference name="StatusBarOverlaysWebView" value="false" />
         <preference name="android-minSdkVersion" value="21" />
         <preference name="SplashMaintainAspectRatio" value="true" />
-        <splash density="land-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
-        <splash density="land-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
-        <splash density="land-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
-        <splash density="land-xxhdpi" src="res/screen/android/drawable-xxhdpi/screen.png" />
-        <splash density="land-xxxhdpi" src="res/screen/android/drawable-xxxhdpi/screen.png" />
-        <splash density="port-hdpi" src="res/screen/android/drawable-hdpi/screen.png" />
-        <splash density="port-mdpi" src="res/screen/android/drawable-mdpi/screen.png" />
-        <splash density="port-xhdpi" src="res/screen/android/drawable-xhdpi/screen.png" />
-        <splash density="port-xxhdpi" src="res/screen/android/drawable-xxhdpi/screen.png" />
-        <splash density="port-xxxhdpi" src="res/screen/android/drawable-xxxhdpi/screen.png" />
-        <icon density="ldpi" src="res/icon/android/mipmap-ldpi/ic_launcher.png" />
-        <icon density="mdpi" src="res/icon/android/mipmap-mdpi/ic_launcher.png" />
-        <icon density="hdpi" src="res/icon/android/mipmap-hdpi/ic_launcher.png" />
-        <icon density="xhdpi" src="res/icon/android/mipmap-xhdpi/ic_launcher.png" />
-        <icon density="xxhdpi" src="res/icon/android/mipmap-xxhdpi/ic_launcher.png" />
-        <icon density="xxxhdpi" src="res/icon/android/mipmap-xxxhdpi/ic_launcher.png" />
+        <splash density="land-hdpi" src="res/screen/android/splash-port-hdpi.png" />
+        <splash density="land-mdpi" src="res/screen/android/splash-port-mdpi.png" />
+        <splash density="land-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <splash density="land-xxhdpi" src="res/screen/android/splash-port-xxhdpi.png" />
+        <splash density="land-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png" />
+        <splash density="land-hdpi" src="res/screen/android/splash-port-hdpi.png" />
+        <splash density="land-mdpi" src="res/screen/android/splash-port-mdpi.png" />
+        <splash density="land-xhdpi" src="res/screen/android/splash-port-xhdpi.png" />
+        <splash density="land-xxhdpi" src="res/screen/android/splash-port-xxhdpi.png" />
+        <splash density="land-xxxhdpi" src="res/screen/android/splash-port-xxxhdpi.png" />
+        <icon density="ldpi" src="res/icon/android/ldpi.png" />
+        <icon density="mdpi" src="res/icon/android/mdpi.png" />
+        <icon density="hdpi" src="res/icon/android/hdpi.png" />
+        <icon density="xhdpi" src="res/icon/android/xhdpi.png" />
+        <icon density="xxhdpi" src="res/icon/android/xxhdpi.png" />
+        <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
     </platform>
     <platform name="ios">
         <config-file parent="CFBundleAllowMixedLocalizations" platform="ios" target="*-Info.plist">
