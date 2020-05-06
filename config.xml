@@ -68,7 +68,7 @@
         <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
     </platform>
     <platform name="ios">
-         <!--INI No se si lo puse bien-->
+        <!--INI No se si lo puse bien-->
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="BackupWebStorage" value="none" />
