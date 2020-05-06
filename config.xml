@@ -5,7 +5,7 @@
         Una aplicacion diseñada para ayudar en la venta unipersonal.
     </description>
     <author email="leandro.gbot@gmail.com" href="https://www.facebook.com/stlservtec/">
-        Apache Cordova Team
+        LeanGbot
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
@@ -17,6 +17,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
 
+    <!--INI No se si lo puse bien-->
     <plugin name="cordova-plugin-camera" spec="~4.0.3">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="Usado para agregar imágenes a la documentación" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Usado para agregar imágenes a la documentación" />
@@ -26,7 +27,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="Usado para agregar imágenes a la documentación" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Usado para agregar imágenes a la documentación" />
     </plugin>
-
+    <!--FIN No se si lo puse bien-->
 
     <platform name="android">
         <allow-intent href="market:*" />
@@ -67,6 +68,7 @@
         <icon density="xxxhdpi" src="res/icon/android/xxxhdpi.png" />
     </platform>
     <platform name="ios">
+         <!--INI No se si lo puse bien-->
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <preference name="BackupWebStorage" value="none" />
@@ -135,7 +137,7 @@
         <gap:config-file parent="CFBundleShortVersionString" platform="ios">
             <string>114</string>
         </gap:config-file>
-
+        <!--FIN No se si lo puse bien-->
         <preference name="StatusBarOverlaysWebView" value="true" />
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
         <icon height="180" src="res/icon/ios/icon-60x60@3x.png" width="180" />
