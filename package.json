@@ -1,14 +1,1 @@
-{
-  "devDependencies": {
-    "cordova-plugin-whitelist": "1"
-  },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-camera": {}
-    }
-  },
-  "dependencies": {
-    "cordova-plugin-camera": "4.1.0"
-  }
-}
+{"devDependencies":{"cordova-plugin-whitelist":"1","cordova-plugin-ios-camera-permissions":"~1.0.3"},"cordova":{"plugins":{"cordova-plugin-whitelist":{},"cordova-plugin-camera":{},"cordova-plugin-ios-camera-permissions":{"CAMERA_USAGE_DESCRIPTION":"Usado para agregar imágenes a la documentación","PHOTOLIBRARY_USAGE_DESCRIPTION":"Usado para agregar imágenes a la documentación"}}},"dependencies":{"cordova-plugin-camera":"4.1.0"}}
