@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline'; font-src * data: URIs ">
-  
+  <meta http-equiv="Content-Security-Policy" content="default-src gap://ready file://* *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *">
+
   <title>PictaVenta</title>
   <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.css">
   <link rel="stylesheet" href="css/icons.css">
@@ -32,7 +33,7 @@
                 <div class="item-inner">
                   <div class="item-title item-floating-label">Email</div>
                   <div class="item-input-wrap">
-                    <input id="login_email" type="email" placeholder="Email" required>
+                    <input id="login_email" type="email" value="leandro.gbot@gmail.com" placeholder="Email" required>
                   </div>
                 </div>
               </li>
@@ -42,7 +43,7 @@
                    <div class="item-inner">
                      <div class="item-title item-floating-label">Contraseña</div>
                      <div class="item-input-wrap">
-                       <input id="login_pass" type="password" placeholder="Contraseña" required>
+                       <input id="login_pass" type="password" value="123456" placeholder="Contraseña" required>
                       </div>
                     </div>
                   </li>
