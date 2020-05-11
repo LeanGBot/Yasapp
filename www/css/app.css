@@ -288,6 +288,8 @@
         top: 0vh;}
 }
 .btn_decremento, .btn_incremento {
+    font-weight: bolder;
+    font-size: 26;
     width: 14vw;
     height: 20vh;
     display: flex;

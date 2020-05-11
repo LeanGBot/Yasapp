@@ -469,11 +469,12 @@ function fnFinalizar() {
 
 function getImage() {  
 	navigator.camera.getPicture(onSuccess,onError,	{
-	    quality: 80,
+	    quality: 100,
 	    destinationType: Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.CAMERA,
       targetWidth: 100,
       targetHeight: 100,
+      correctOrientation: true,
 	});
 }
 
