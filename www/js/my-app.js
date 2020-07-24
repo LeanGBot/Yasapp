@@ -442,7 +442,7 @@ keys = Object.keys(localStorage),
 i = keys.length;
 
 while ( i-- ) {
-  values.push( localStorage.getItem(keys[i]) );
+  values.push(localStorage.getItem(keys[i]));
 
   var vta = storage.getItem(keys[i]);
   vta = JSON.parse(vta);
