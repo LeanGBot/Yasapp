@@ -1,9 +1,3 @@
-# Framework 7 Template - Version 5.4.2
+Yassap is an app created to practice with data base local and remote (Firebase)
 
-My first app.
-
-Features:
-* Login & register with Firebase
-* DataBase with Firestore & firestorage
-* LocalDB
-* Cordova Cameral Plugin
+Made with Framework7 and phonegap
